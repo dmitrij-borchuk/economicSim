@@ -10,4 +10,4 @@
 | Task 4: Economy, Markets & Consumption Sinks Docs | Done | Completed spot-exchange-orderbooks.md, b2b-contracts.md, settlement-consumer-demand.md, capital-construction-sink.md |
 | Task 5: Player Progression & Onboarding Docs | Done | Completed onboarding-and-licenses.md and company-management.md |
 | Task 6: Technical Software Architecture Docs | Done | Completed system-design-overview.md, data-schemas.md, and api-and-websocket-protocol.md |
-| Task 7: Master Map of Content & Graph Verification | In Progress | Updating docs/index.md and verifying all Obsidian wikilinks |
+| Task 7: Master Map of Content & Graph Verification | Done | Finalized docs/index.md MOC; 100% of 21 Obsidian wikilinks verified |
