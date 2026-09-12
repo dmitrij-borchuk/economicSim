@@ -40,10 +40,10 @@ export interface EngineConfig {
 
   /** Quality system constants */
   quality: {
-    minQuality: number;             // 1
-    maxQuality: number;             // 100
-    defaultDepositQuality: number;  // 50
-    techBonusPerLevel: number;      // e.g. 0.05 (+5% per tech tier)
+    minQuality: number;               // 1
+    maxQuality: number;               // 100
+    defaultEquipmentQuality: number;  // 50 (baseline starter equipment)
+    techBonusPerLevel: number;        // e.g. 0.05 (+5% per tech tier)
   };
 
   /** Market & trading parameters */

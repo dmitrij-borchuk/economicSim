@@ -40,19 +40,26 @@ Where:
 - $\text{FacilityLevel}$: The upgraded tier of the installation ($1, 2, 3, \dots$). Higher levels represent expanded drilling rigs, automated tractors, or deep shaft elevators.
 - $\text{TechBonus}$: Corporate technological improvement fraction (default $0.0$, scales with research).
 
-The output item is generated with the intrinsic natural quality of the deposit node:
-$$Q_{\text{harvested}} = Q_{\text{deposit}}$$
+The output item's quality is calculated from the operator's installed equipment (such as harvesters, picks, drill rigs, or tools fitted to the facility) and facility technology:
+$$Q_{\text{harvested}} = \min\left(100.0, Q_{\text{equipment}} \times (1 + \text{TechBonus})\right)$$
+
+Where:
+- $Q_{\text{equipment}}$: Quality rating of the tools or capital equipment equipped in the extraction facility (e.g. `TOOLS` crafted by a Toolsmith).
+- $\text{TechBonus}$: Corporate technological improvement fraction.
 
 ---
 
 ## 3. Starter Extraction Facilities Directory
 
-| Facility Type | Required Deposit | Base Yield ($\text{units/tick}$) | Deposit Quality ($Q$) | Base Maintenance | Primary Outputs |
+| Facility Type | Required Deposit | Base Yield ($\text{units/tick}$) | Required Equipment | Base Maintenance | Primary Outputs |
 |---|---|---|---|---|---|
-| **Grain Farm** | `GRAIN` | $20\text{ units}$ | $Q = 55$ | $25\text{ Cr/tick}$ | `GRAIN` |
-| **Lumber Camp** | `TIMBER` | $15\text{ units}$ | $Q = 50$ | $20\text{ Cr/tick}$ | `TIMBER` |
-| **Iron Mine** | `IRON_ORE` | $10\text{ units}$ | $Q = 60$ | $40\text{ Cr/tick}$ | `IRON_ORE` |
-| **Stone Quarry** | `STONE` | $15\text{ units}$ | $Q = 50$ | $25\text{ Cr/tick}$ | `STONE` |
+| **Grain Farm** | `GRAIN` | $20\text{ units}$ | Agricultural Tools / Harvester | $25\text{ Cr/tick}$ | `GRAIN` |
+| **Lumber Camp** | `TIMBER` | $15\text{ units}$ | Logging Axes / Saws | $20\text{ Cr/tick}$ | `TIMBER` |
+| **Iron Mine** | `IRON_ORE` | $10\text{ units}$ | Mining Picks / Drills | $40\text{ Cr/tick}$ | `IRON_ORE` |
+| **Stone Quarry** | `STONE` | $15\text{ units}$ | Quarrying Chisels / Saws | $25\text{ Cr/tick}$ | `STONE` |
+
+> [!NOTE]
+> Higher quality equipment produces higher quality raw harvests. If a facility operates without specialized equipment, it utilizes standard baseline starter tools ($Q_{\text{equipment}} = 50.0$).
 
 ---
 
@@ -67,6 +74,6 @@ To prevent infinite clustering of facilities on a single resource node:
 
 ## Related Notes
 - [[transformation-chains]] - Processing extracted raw materials into refined products.
-- [[quality-system]] - How deposit quality impacts downstream manufacturing.
+- [[quality-system]] - How equipment quality seeds the economic value chain and blends downstream.
 - [[starter-province-map]] - Node coordinates and yield values in Oakhaven Basin.
 - [[company-management]] - Facility operational costs and balance sheet impacts.

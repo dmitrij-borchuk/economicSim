@@ -67,7 +67,7 @@ graph TD
   1. For each active extraction facility (farms, mines, lumber camps) on a [[resource-extraction|Resource Node]]:
   2. The base yield is scaled by regional resource modifiers, facility level, and technological upgrades:
      $$\text{ExtractedQty} = \text{BaseYield} \times \text{RegionalMultiplier} \times \text{Level} \times (1 + \text{TechBonus})$$
-  3. Extracted raw materials are added to the facility's local storage warehouse at the natural deposit's intrinsic quality $Q_{\text{deposit}}$.
+  3. Extracted raw materials are added to the facility's local storage warehouse at the quality determined by installed equipment and tech ($Q_{\text{harvested}} = \min(100, Q_{\text{equipment}} \times (1 + \text{TechBonus}))$).
 
 ### Phase 3: Industrial Transformation & Quality Blending
 - **Objective**: Convert raw and intermediate items into higher-tier goods.

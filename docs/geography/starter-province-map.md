@@ -57,11 +57,14 @@ graph TD
 
 ## 3. Natural Resource Nodes Directory
 
-| Resource Node ID | Display Name | Coordinates | Resource Types | Yield Multipliers | Base Deposit Quality |
-|---|---|---|---|---|---|
-| `node_verdant_fields` | **Verdant Fields** | `(120, 280)` | `GRAIN` | **1.4x** (40% bonus) | $Q = 55$ |
-| `node_whispering_pines` | **Whispering Pines** | `(310, 390)` | `TIMBER` | **1.3x** (30% bonus) | $Q = 50$ |
-| `node_red_rock_crag` | **Red Rock Crag** | `(420, 110)` | `IRON_ORE`, `STONE` | **1.5x** (Iron), **1.2x** (Stone) | $Q = 60$ (Iron), $Q = 50$ (Stone) |
+| Resource Node ID | Display Name | Coordinates | Resource Types | Yield Multipliers |
+|---|---|---|---|---|
+| `node_verdant_fields` | **Verdant Fields** | `(120, 280)` | `GRAIN` | **1.4x** (40% bonus) |
+| `node_whispering_pines` | **Whispering Pines** | `(310, 390)` | `TIMBER` | **1.3x** (30% bonus) |
+| `node_red_rock_crag` | **Red Rock Crag** | `(420, 110)` | `IRON_ORE`, `STONE` | **1.5x** (Iron), **1.2x** (Stone) |
+
+> [!NOTE]
+> Resource deposit nodes do not have intrinsic quality ratings. The quality of extracted raw resources is calculated dynamically from the operator's installed extraction equipment and facility technology. See [[resource-extraction]] and [[quality-system]].
 
 ---
 

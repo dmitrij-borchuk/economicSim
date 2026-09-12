@@ -44,7 +44,21 @@ If a manufacturer attempts to dilute a small high-quality batch with cheap low-q
 
 ---
 
-## 3. Transformation Output Quality Formula
+## 3. Primary Resource Extraction Quality Formula
+
+Raw materials extracted directly from natural resource deposits (such as Grain, Timber, Iron Ore, and Stone) do not have intrinsic deposit qualities. Instead, the quality of freshly harvested commodities is calculated dynamically from the operator's installed equipment/tools and facility technology during [[simulation-tick-loop|Tick Phase 2]]:
+
+$$Q_{\text{harvested}} = \min\left(100.0, Q_{\text{equipment}} \times (1 + \text{TechBonus})\right)$$
+
+Where:
+- $Q_{\text{equipment}}$: The quality rating of the tools or machinery equipped at the extraction facility (e.g. `TOOLS` crafted by a Toolsmith; defaults to baseline $50.0$ if unequipped).
+- $\text{TechBonus}$: Corporate technological improvement fraction.
+
+This creates a self-reinforcing economic loop: higher-tier crafted tools yield higher-grade raw materials, which in turn feed higher-quality downstream manufacturing.
+
+---
+
+## 4. Transformation Output Quality Formula
 
 When a factory processes input items into an output item during [[simulation-tick-loop|Tick Phase 3]]:
 
@@ -65,7 +79,7 @@ Where:
 
 ---
 
-## 4. Worked Calculation Example
+## 5. Worked Calculation Example
 
 ### Scenario:
 A **Toolsmith** crafts `TOOLS` requiring $1\times \text{IRON\_INGOT}$ (weight $w_1 = 0.6$) and $1\times \text{PLANK}$ (weight $w_2 = 0.4$).
@@ -79,11 +93,11 @@ A **Toolsmith** crafts `TOOLS` requiring $1\times \text{IRON\_INGOT}$ (weight $w
 2. **Applying Tech Modifier**:
    $$Q_{\text{final}} = 59.0 \times (1 + 0.10) = 59.0 \times 1.10 = 64.9$$
 3. **Result**:
-   The output tools enter the warehouse at **$Q = 64.9$** (Refined Grade), eligible for higher-tier construction recipes and premium market contracts.
+   The output tools enter the warehouse at **$Q = 64.9$** (Refined Grade), eligible for higher-tier construction recipes, advanced extraction equipment, and premium market contracts.
 
 ---
 
-## 5. Quality in Spot Orders & B2B Contracts
+## 6. Quality in Spot Orders & B2B Contracts
 
 - In [[spot-exchange-orderbooks]], buyers can specify a `minQuality` filter. An order book match will **only** execute if the seller's lot satisfies $Q_{\text{seller}} \ge Q_{\text{buyer\_min}}$.
 - In [[b2b-contracts]], supply lines specify a strict SLA: if the supplier's warehouse quality dips below the agreed $Q_{\text{contract}}$, the automated transfer halts to protect the buyer from contamination.
@@ -91,6 +105,7 @@ A **Toolsmith** crafts `TOOLS` requiring $1\times \text{IRON\_INGOT}$ (weight $w
 ---
 
 ## Related Notes
+- [[resource-extraction]] - Primary commodity harvesting and equipment quality mechanics.
 - [[transformation-chains]] - Recipe execution and batch throughput.
 - [[settlement-consumer-demand]] - How town populations evaluate quality.
 - [[spot-exchange-orderbooks]] - Order matching rules with quality constraints.

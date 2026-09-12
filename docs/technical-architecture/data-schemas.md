@@ -96,26 +96,26 @@ model MapNode {
   wealthIndex     Float?      @default(1.0)
   resourceType    String?     // e.g. "GRAIN", "IRON_ORE"
   baseYieldBonus  Float?      @default(1.0)
-  depositQuality  Float?      @default(50.0)
   facilities      Facility[]
   orders          MarketOrder[]
 }
 
 model Facility {
-  id              String           @id @default(uuid())
-  name            String
-  companyId       String
-  company         Company          @relation(fields: [companyId], references: [id])
-  nodeId          String
-  node            MapNode          @relation(fields: [nodeId], references: [id])
-  facilityType    String           // e.g. "GRAIN_FARM", "SMELTER"
-  category        FacilityCategory
-  level           Int              @default(1)
-  recipeId        String?
-  techBonus       Float            @default(0.0)
-  isOperating     Boolean          @default(true)
-  inventory       InventoryItem[]
-  createdAt       DateTime         @default(now())
+  id               String           @id @default(uuid())
+  name             String
+  companyId        String
+  company          Company          @relation(fields: [companyId], references: [id])
+  nodeId           String
+  node             MapNode          @relation(fields: [nodeId], references: [id])
+  facilityType     String           // e.g. "GRAIN_FARM", "SMELTER"
+  category         FacilityCategory
+  level            Int              @default(1)
+  recipeId         String?
+  techBonus        Float            @default(0.0)
+  equipmentQuality Float?           @default(50.0) // Quality of installed tools/harvester rigs
+  isOperating      Boolean          @default(true)
+  inventory        InventoryItem[]
+  createdAt        DateTime         @default(now())
 
   @@index([companyId])
   @@index([nodeId])
