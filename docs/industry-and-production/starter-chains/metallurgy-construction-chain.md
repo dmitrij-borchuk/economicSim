@@ -25,7 +25,7 @@ For quality blending math on multi-input recipes, see [[quality-system]].
 
 ```mermaid
 graph TD
-    RRC[(Red Rock Crag<br>Iron: 1.5x | Stone: 1.2x)] -->|Mining| IM[Iron Mine<br>Yield: 15 Ore/tick]
+    RRC[(Red Rock Crag<br>Iron: 1.5x - Stone: 1.2x)] -->|Mining| IM[Iron Mine<br>Yield: 15 Ore/tick]
     RRC -->|Quarrying| SQ[Stone Quarry<br>Yield: 18 Stone/tick]
 
     IM -->|2 Iron Ore| SM[Smelter<br>Produces: 1 Iron Ingot]

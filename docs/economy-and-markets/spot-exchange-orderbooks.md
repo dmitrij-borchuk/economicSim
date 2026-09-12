@@ -67,7 +67,7 @@ sequenceDiagram
         Engine->>Ledger: Deduct Instant Delivery Freight Fee
         Engine->>Ledger: Transfer Goods to Buyer Facility
     else Price Gap OR Quality Insufficient
-        Note over Engine: No Match; Orders Rest on Book
+        Note over Engine: No Match, Orders Rest on Book
     end
 ```
 

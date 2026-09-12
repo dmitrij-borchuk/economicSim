@@ -11,7 +11,7 @@ status: approved
 created: 2026-09-12
 ---
 
-# B2B Long-Term Supply Contracts
+# B2B Long-Term Supply Contracts (later phase)
 
 While [[spot-exchange-orderbooks|Spot Markets]] handle immediate commodity liquidity, **B2B Recurring Supply Contracts** form the foundation of automated, predictable industrial supply chains. Contracts allow players to establish recurring tick-by-tick shipments between specific facilities at agreed-upon prices and quality SLAs.
 
@@ -52,7 +52,7 @@ graph TD
     Start([Phase 1 Tick Begins]) --> Query[Query all ACTIVE B2B Contracts]
     Query --> CheckStock{Seller stock >= QtyPerTick<br>AND Quality >= MinQuality?}
     
-    CheckStock -- Yes --> CheckFunds{Buyer cash >= TotalCost<br>(Goods + Freight)?}
+    CheckStock -- Yes --> CheckFunds{Buyer cash >= TotalCost<br>Goods + Freight?}
     CheckStock -- No --> BreachSeller[Increment Breach Counter<br>Levy Seller Penalty Fee]
     
     CheckFunds -- Yes --> Transfer[Transfer Items to Buyer Facility<br>Transfer Cash to Seller<br>Deduct Freight Fee from Buyer via Distance Graph]
