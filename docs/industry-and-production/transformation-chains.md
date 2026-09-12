@@ -59,14 +59,14 @@ export interface Recipe {
 
 | Facility | Inputs Required per Batch | Outputs per Batch | Base Maintenance | Sector |
 |---|---|---|---|---|
-| **Flour Mill** | $2\times \text{Grain}$ | $1\times \text{Flour}$ | $20\text{ Cr/tick}$ | [[agriculture-chain\|Agriculture]] |
-| **Bakery** | $1\times \text{Flour}$ | $2\times \text{Bread}$ | $30\text{ Cr/tick}$ | [[agriculture-chain\|Agriculture]] |
-| **Sawmill** | $2\times \text{Timber}$ | $2\times \text{Planks}$ | $25\text{ Cr/tick}$ | [[forestry-chain\|Forestry]] |
-| **Carpentry Workshop** | $2\times \text{Planks}$ | $1\times \text{Furniture}$ | $35\text{ Cr/tick}$ | [[forestry-chain\|Forestry]] |
-| **Smelter** | $2\times \text{Iron Ore}$ | $1\times \text{Iron Ingot}$ | $50\text{ Cr/tick}$ | [[metallurgy-construction-chain\|Metallurgy]] |
-| **Brick Kiln** | $2\times \text{Stone}$ | $2\times \text{Bricks}$ | $30\text{ Cr/tick}$ | [[metallurgy-construction-chain\|Construction]] |
-| **Toolsmith** | $1\times \text{Iron Ingot} + 1\times \text{Plank}$ | $2\times \text{Tools}$ | $45\text{ Cr/tick}$ | [[metallurgy-construction-chain\|Heavy Industry]] |
-| **Construction Yard** | $2\times \text{Iron Ingot} + 4\times \text{Bricks} + 4\times \text{Planks}$ | $1\times \text{Building Kit}$ | $60\text{ Cr/tick}$ | [[capital-construction-sink\|Capital Expansion]] |
+| **Flour Mill** | $2\times \text{Grain}$ | $1\times \text{Flour}$ | $20\text{ Cr/tick}$ | [[agriculture-chain]] |
+| **Bakery** | $1\times \text{Flour}$ | $2\times \text{Bread}$ | $30\text{ Cr/tick}$ | [[agriculture-chain]] |
+| **Sawmill** | $2\times \text{Timber}$ | $2\times \text{Planks}$ | $25\text{ Cr/tick}$ | [[forestry-chain]] |
+| **Carpentry Workshop** | $2\times \text{Planks}$ | $1\times \text{Furniture}$ | $35\text{ Cr/tick}$ | [[forestry-chain]] |
+| **Smelter** | $2\times \text{Iron Ore}$ | $1\times \text{Iron Ingot}$ | $50\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
+| **Brick Kiln** | $2\times \text{Stone}$ | $2\times \text{Bricks}$ | $30\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
+| **Toolsmith** | $1\times \text{Iron Ingot} + 1\times \text{Plank}$ | $2\times \text{Tools}$ | $45\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
+| **Construction Yard** | $2\times \text{Iron Ingot} + 4\times \text{Bricks} + 4\times \text{Planks}$ | $1\times \text{Building Kit}$ | $60\text{ Cr/tick}$ | [[capital-construction-sink]] |
 
 ---
 
