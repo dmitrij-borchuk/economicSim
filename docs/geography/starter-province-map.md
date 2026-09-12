@@ -1,5 +1,5 @@
 ---
-title: Starter Province Map: Oakhaven Basin
+title: Starter Province Map - Oakhaven Basin
 tags:
   - geography
   - starter-province
@@ -23,14 +23,14 @@ For delivery fee calculations across these nodes, see [[delivery-and-freight]].
 
 ```mermaid
 graph TD
-    PO[Port Oakhaven<br>Pop: 25,000 | Central Hub]
-    MB[Millbrook<br>Pop: 8,000 | Farm Town]
-    IR[Ironridge<br>Pop: 6,000 | Mining Town]
-    PW[Pinewood<br>Pop: 5,000 | Forest Town]
+    PO[Port Oakhaven<br>Pop: 25,000 - Central Hub]
+    MB[Millbrook<br>Pop: 8,000 - Farm Town]
+    IR[Ironridge<br>Pop: 6,000 - Mining Town]
+    PW[Pinewood<br>Pop: 5,000 - Forest Town]
 
     VF[Verdant Fields<br>Grain Node: 1.4x]
     WP[Whispering Pines<br>Timber Node: 1.3x]
-    RC[Red Rock Crag<br>Iron: 1.5x | Stone: 1.2x]
+    RC[Red Rock Crag<br>Iron: 1.5x - Stone: 1.2x]
 
     PO <== Paved Highway: 30km ==> MB
     MB <== Dirt Road: 15km ==> VF
