@@ -29,7 +29,7 @@ $$\text{FreightCost}(u, v, \text{Item}, N) = \max\left(\text{MinFee}, N \times W
 Where:
 - $N$: Number of item units transported.
 - $W(\text{Item})$: Cargo weight coefficient of the item in kilograms ($\text{kg/unit}$).
-- $D[u, v]$: Shortest effective graph distance between origin $u$ and destination $v$ in kilometers ($\text{km}$), as precomputed in [[spatial-graph-model]].
+- $D[u, v]$: Shortest physical graph distance between origin $u$ and destination $v$ in kilometers ($\text{km}$), as precomputed in [[spatial-graph-model]].
 - $R_{\text{freight}}$: Base freight rate constant, default $0.0001\text{ Credits / (kg} \cdot \text{km)}$ (see [[configuration-and-parameters]]).
 - $\text{MinFee}$: Minimum logistics handling fee per dispatch, default $10.0\text{ Credits}$.
 
@@ -45,9 +45,9 @@ Heavier bulk materials incur substantially higher freight costs, making local pr
 | Item Category | Sample Items | Weight per Unit ($W$) | Economic Significance |
 |---|---|---|---|
 | **Heavy Minerals** | `IRON_ORE`, `STONE`, `COAL` | **$100\text{ kg}$** | Very expensive to haul raw; incentivizes local smelting at [[metallurgy-construction-chain|Ironridge]]. |
-| **Heavy Construction** | `BRICKS`, `IRON_INGOTS` | **$60\text{ kg}$** | Moderately dense; bulk transport benefits from sea lanes. |
+| **Heavy Construction** | `BRICKS`, `IRON_INGOTS` | **$60\text{ kg}$** | Moderately dense; incurs moderate freight overhead over long distances. |
 | **Timber Products** | `TIMBER`, `PLANKS` | **$50\text{ kg}$** | Medium weight; processing into planks reduces waste before long-haul transit. |
-| **Agricultural Bulk** | `GRAIN`, `FLOUR` | **$25\text{ kg}$** | Light bulk; easier to ship along paved highways. |
+| **Agricultural Bulk** | `GRAIN`, `FLOUR` | **$25\text{ kg}$** | Light bulk; economical to transport over regional distances. |
 | **Manufactured Hardware**| `TOOLS`, `BUILDING_KITS` | **$20\text{ kg}$** | High value-to-weight ratio. |
 | **Finished Consumer** | `BREAD`, `FURNITURE` | **$10\text{ kg}$** | High margin; low delivery overhead to retail sinks. |
 
@@ -75,15 +75,15 @@ A bakery in **Port Oakhaven** purchases $200\text{ units}$ of `FLOUR` from a flo
    - $W(\text{FLOUR}) = 25\text{ kg/unit}$
    - Total Mass $= 200 \times 25 = 5,000\text{ kg}$ ($5\text{ metric tons}$)
 2. **Route Distance**:
-   - From `node_millbrook` to `node_port_oakhaven` via Paved Highway:
+   - Direct route from `node_millbrook` to `node_port_oakhaven`:
    - $D[\text{Millbrook}, \text{Port Oakhaven}] = 30\text{ km}$
 3. **Freight Calculation**:
    $$\text{FreightCost} = 5,000\text{ kg} \times 30\text{ km} \times 0.0001 = 15.0\text{ Credits}$$
    Since $15.0 > \text{MinFee}$ ($10.0$), the charge is **$15.0\text{ Credits}$** ($0.075\text{ Cr/unit}$).
 
 If the same bakery instead purchased raw `GRAIN` ($25\text{ kg/unit}$) directly from **Verdant Fields**:
-- Distance: $15\text{ km (dirt road: } 21\text{ km eff)} + 30\text{ km (paved)} = 51\text{ km eff}$.
-- Freight Cost $= 5,000 \times 51 \times 0.0001 = 25.5\text{ Credits}$.
+- Distance: $15\text{ km (Verdant Fields } \rightarrow \text{ Millbrook)} + 30\text{ km (Millbrook } \rightarrow \text{ Port Oakhaven)} = 45\text{ km}$.
+- Freight Cost $= 5,000\text{ kg} \times 45\text{ km} \times 0.0001 = 22.5\text{ Credits}$ ($0.1125\text{ Cr/unit}$).
 
 ---
 

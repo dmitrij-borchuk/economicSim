@@ -10,7 +10,7 @@ type: specification
 status: approved
 created: 2026-09-12
 ---
-
+					
 # Spatial Graph Model & Planetary Scaling
 
 Space in the economic simulator is modeled as an **undirected, weighted topological graph** $G = (V, E)$ rather than a continuous micro-tile grid. This abstraction allows the simulation to scale effortlessly from a single localized starting region to an entire imaginary planet without incurring prohibitive pathfinding or spatial indexing overheads.
@@ -34,10 +34,10 @@ graph LR
         R2[Red Rock Crag<br>Iron & Stone]
     end
 
-    S1 <== Road: 35km ==> S2
-    S2 <== Road: 25km ==> R1
-    S1 <== Coastal: 60km ==> S3
-    S3 <== Mountain Trail: 15km ==> R2
+    S1 <== 35km ==> S2
+    S2 <== 25km ==> R1
+    S1 <== 60km ==> S3
+    S3 <== 15km ==> R2
 ```
 
 ### Vertices ($V$)
@@ -52,15 +52,8 @@ Every vertex represents a discrete geographic location where economic activity o
    - Reference: [[resource-extraction]].
 
 ### Edges ($E$)
-An edge $e = (u, v) \in E$ represents a physical transport corridor between node $u$ and node $v$:
-- **Distance ($d_{u,v}$)**: Geometric or traveled distance in kilometers ($\text{km}$).
-- **Corridor Type**:
-  - `DIRT_ROAD`: Base terrain transit coefficient $C_{\text{terrain}} = 1.4$.
-  - `PAVED_HIGHWAY`: $C_{\text{terrain}} = 1.0$.
-  - `RAIL_CORRIDOR`: $C_{\text{terrain}} = 0.6$ (highly efficient bulk transport).
-  - `COASTAL_SEALANE`: $C_{\text{terrain}} = 0.4$ (lowest cost for heavy raw materials).
-- **Effective Distance Metric**:
-  $$d_{\text{eff}}(u, v) = d_{u,v} \times C_{\text{terrain}}$$
+An edge $e = (u, v) \in E$ represents a direct physical transport link between node $u$ and node $v$:
+- **Distance ($d_{u,v}$)**: Geometric or traveled distance in kilometers ($\text{km}$), serving directly as the graph edge weight $w(u, v) = d_{u,v}$.
 
 ---
 
@@ -96,7 +89,7 @@ graph TD
 
 Since the graph $G$ consists of several dozen to several hundred nodes in early-to-mid phases, the all-pairs shortest paths matrix $D[u, v]$ is pre-computed at server boot using the **Floyd-Warshall** or **Dijkstra** algorithm:
 
-$$D[u, v] = \min_{p \in \mathcal{P}(u, v)} \sum_{e \in p} d_{\text{eff}}(e)$$
+$$D[u, v] = \min_{p \in \mathcal{P}(u, v)} \sum_{e \in p} d(e)$$
 
 The pre-computed distance matrix is stored in Redis / Server Memory. Whenever a trade, delivery, or B2B supply contract resolves, distance lookups execute in $O(1)$ time complexity.
 

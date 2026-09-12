@@ -32,14 +32,14 @@ graph TD
     WP[Whispering Pines<br>Timber Node: 1.3x]
     RC[Red Rock Crag<br>Iron: 1.5x - Stone: 1.2x]
 
-    PO <== Paved Highway: 30km ==> MB
-    MB <== Dirt Road: 15km ==> VF
-    PO <== Coastal Sea Lane: 45km ==> IR
-    IR <== Mountain Trail: 12km ==> RC
-    PO <== Paved Highway: 35km ==> PW
-    PW <== Dirt Road: 10km ==> WP
-    MB <== Dirt Road: 40km ==> PW
-    IR <== Dirt Road: 55km ==> MB
+    PO <== 30km ==> MB
+    MB <== 15km ==> VF
+    PO <== 45km ==> IR
+    IR <== 12km ==> RC
+    PO <== 35km ==> PW
+    PW <== 10km ==> WP
+    MB <== 40km ==> PW
+    IR <== 55km ==> MB
 ```
 
 ---
@@ -65,24 +65,24 @@ graph TD
 
 ---
 
-## 4. Corridor & Distance Matrix
+## 4. Distance Matrix & Network Topology
 
 The table below lists all direct edges in the Oakhaven Basin network:
 
-| Origin Node ($u$) | Destination Node ($v$) | Physical Distance ($d$) | Corridor Type | Terrain Multiplier ($C_t$) | Effective Distance ($d_{\text{eff}}$) |
-|---|---|---|---|---|---|
-| `node_port_oakhaven` | `node_millbrook` | $30\text{ km}$ | `PAVED_HIGHWAY` | $1.0$ | **$30\text{ km}$** |
-| `node_millbrook` | `node_verdant_fields` | $15\text{ km}$ | `DIRT_ROAD` | $1.4$ | **$21\text{ km}$** |
-| `node_port_oakhaven` | `node_ironridge` | $45\text{ km}$ | `COASTAL_SEALANE` | $0.4$ | **$18\text{ km}$** |
-| `node_ironridge` | `node_red_rock_crag` | $12\text{ km}$ | `DIRT_ROAD` | $1.4$ | **$16.8\text{ km}$** |
-| `node_port_oakhaven` | `node_pinewood` | $35\text{ km}$ | `PAVED_HIGHWAY` | $1.0$ | **$35\text{ km}$** |
-| `node_pinewood` | `node_whispering_pines`| $10\text{ km}$ | `DIRT_ROAD` | $1.4$ | **$14\text{ km}$** |
-| `node_millbrook` | `node_pinewood` | $40\text{ km}$ | `DIRT_ROAD` | $1.4$ | **$56\text{ km}$** |
-| `node_ironridge` | `node_millbrook` | $55\text{ km}$ | `DIRT_ROAD` | $1.4$ | **$77\text{ km}$** |
+| Origin Node ($u$) | Destination Node ($v$) | Distance ($d$) |
+|---|---|---|
+| `node_port_oakhaven` | `node_millbrook` | $30\text{ km}$ |
+| `node_millbrook` | `node_verdant_fields` | $15\text{ km}$ |
+| `node_port_oakhaven` | `node_ironridge` | $45\text{ km}$ |
+| `node_ironridge` | `node_red_rock_crag` | $12\text{ km}$ |
+| `node_port_oakhaven` | `node_pinewood` | $35\text{ km}$ |
+| `node_pinewood` | `node_whispering_pines` | $10\text{ km}$ |
+| `node_millbrook` | `node_pinewood` | $40\text{ km}$ |
+| `node_ironridge` | `node_millbrook` | $55\text{ km}$ |
 
 ### Strategic Geographic Dynamics:
-- **Port Oakhaven's Coastal Advantage**: Although Ironridge is physically $45\text{ km}$ away from Port Oakhaven, the coastal sea lane gives it an effective distance of only $18\text{ km}$, making sea freight of heavy iron and stone very cheap.
-- **Inland Grain Route**: Millbrook can supply Port Oakhaven along the paved highway with low transit cost, but shipping grain over land to Ironridge incurs an effective distance of $77\text{ km}$, making it cheaper for Ironridge to import flour through Port Oakhaven.
+- **Port Oakhaven's Central Hub Role**: As the provincial trade hub, Port Oakhaven connects directly to all three specialized settlements (Millbrook at $30\text{ km}$, Pinewood at $35\text{ km}$, and Ironridge at $45\text{ km}$), enabling efficient distribution across the basin.
+- **Local Extraction vs Inter-Settlement Hauls**: Short extraction-to-town routes (e.g. Verdant Fields to Millbrook at $15\text{ km}$, Red Rock Crag to Ironridge at $12\text{ km}$) have minimal delivery overhead, while long peripheral routes between outer settlements (e.g. Ironridge to Millbrook at $55\text{ km}$) incur substantial freight fees, encouraging local processing and trading through the primary exchange.
 
 ---
 
