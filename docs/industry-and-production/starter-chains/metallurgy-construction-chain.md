@@ -48,44 +48,32 @@ graph TD
 ### Tier 1: Extraction at Red Rock Crag
 - **Iron Mine (`IRON_MINE`)**:
   - Deposit Yield: Base $10 \times 1.5\text{ (Red Rock Crag)} = \mathbf{15\text{ units of Iron Ore/tick}}$.
-  - Natural Quality: $Q = 60.0$.
   - Unit Cargo Weight: $100\text{ kg/unit}$ (very heavy bulk material).
-  - Operating Cost: $40\text{ Cr/tick}$.
 - **Stone Quarry (`STONE_QUARRY`)**:
   - Deposit Yield: Base $15 \times 1.2\text{ (Red Rock Crag)} = \mathbf{18\text{ units of Stone/tick}}$.
-  - Natural Quality: $Q = 50.0$.
   - Unit Cargo Weight: $100\text{ kg/unit}$.
-  - Operating Cost: $25\text{ Cr/tick}$.
 
 ### Tier 2: Basic Smelting & Masonry
 - **Smelter (`SMELTER`)**:
   - Inputs: $2\times \text{IRON\_ORE}$ ($w_1 = 1.0$).
   - Outputs: $1\times \text{IRON\_INGOT}$.
   - Unit Cargo Weight: $60\text{ kg/unit}$.
-  - Operating Cost: $50\text{ Cr/tick}$.
 - **Brick Kiln (`BRICK_KILN`)**:
   - Inputs: $2\times \text{STONE}$ ($w_1 = 1.0$).
   - Outputs: $2\times \text{BRICKS}$.
   - Unit Cargo Weight: $60\text{ kg/unit}$.
-  - Operating Cost: $30\text{ Cr/tick}$.
 
 ### Tier 3: Tools & Heavy Hardware
 - **Toolsmith (`TOOLSMITH`)**:
   - Inputs: $1\times \text{IRON\_INGOT}$ ($w_1 = 0.6$) $+ 1\times \text{PLANK}$ ($w_2 = 0.4$).
   - Outputs: $2\times \text{TOOLS}$.
-  - Quality Formula:
-    $$Q_{\text{tools}} = ((0.6 \times Q_{\text{ingot}}) + (0.4 \times Q_{\text{plank}})) \times (1 + \text{TechBonus})$$
   - Unit Cargo Weight: $20\text{ kg/unit}$.
-  - Operating Cost: $45\text{ Cr/tick}$.
 
 ### Tier 4: Modular Assembly (Capital Good)
 - **Construction Yard (`CONSTRUCTION_YARD`)**:
   - Inputs: $2\times \text{IRON\_INGOT}$ ($w_1 = 0.4$) $+ 4\times \text{BRICKS}$ ($w_2 = 0.3$) $+ 4\times \text{PLANKS}$ ($w_3 = 0.3$).
   - Outputs: $1\times \text{BUILDING\_KIT}$.
-  - Quality Formula:
-    $$Q_{\text{kit}} = ((0.4 \times Q_{\text{ingot}}) + (0.3 \times Q_{\text{bricks}}) + (0.3 \times Q_{\text{plank}})) \times (1 + \text{TechBonus})$$
   - Unit Cargo Weight: $150\text{ kg/unit}$.
-  - Operating Cost: $60\text{ Cr/tick}$.
 
 ---
 

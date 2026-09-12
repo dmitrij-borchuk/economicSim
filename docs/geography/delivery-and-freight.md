@@ -55,13 +55,15 @@ Heavier bulk materials incur substantially higher freight costs, making local pr
 
 ## 3. Freight Payment Allocation Rules
 
+Across all trade mechanics in the economic simulation, the **Buyer always pays the freight fee**:
+
 ### In Spot Exchange Trading ([[spot-exchange-orderbooks]]):
-- **Default Rule**: The **Buyer** pays the delivery fee from the seller facility to the buyer facility.
+- The **Buyer** pays the delivery fee from the seller facility to the buyer facility.
 - When an order is matched, the matching engine calculates the exact distance $D[\text{SellerLoc}, \text{BuyerLoc}]$, deducts the freight fee from the buyer's balance, and deposits the goods into the buyer's destination warehouse.
 
 ### In B2B Recurring Supply Contracts ([[b2b-contracts]]):
-- The contract specifies whether the terms are **FOB Destination** (Seller pays freight) or **FOB Origin** (Buyer pays freight).
-- The freight fee is settled in [[simulation-tick-loop|Tick Phase 1]].
+- The **Buyer** always pays the freight fee from the supplier's facility to the buyer's destination facility.
+- The freight fee is calculated via shortest-path distance and settled from the buyer's balance in [[simulation-tick-loop|Tick Phase 1]].
 
 ---
 

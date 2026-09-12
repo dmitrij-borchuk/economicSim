@@ -58,11 +58,6 @@ enum ContractStatus {
   CANCELLED_MUTUAL
 }
 
-enum FreightTerms {
-  FOB_ORIGIN
-  FOB_DESTINATION
-}
-
 model User {
   id           String    @id @default(uuid())
   email        String    @unique
@@ -166,7 +161,6 @@ model B2BContract {
   quantityPerTick    Int
   unitPrice          Decimal        @db.Decimal(12, 4)
   minQuality         Float
-  freightTerms       FreightTerms
   startTick          BigInt
   durationTicks      Int
   consecutiveBreaches Int           @default(0)

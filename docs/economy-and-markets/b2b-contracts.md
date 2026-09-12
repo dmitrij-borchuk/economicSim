@@ -32,7 +32,6 @@ export interface B2BContract {
   quantityPerTick: number;      // e.g. 10 units / tick
   unitPrice: number;            // Fixed price per unit in Credits
   minQuality: number;           // SLA: shipments below this quality are rejected
-  freightTerms: 'FOB_ORIGIN' | 'FOB_DESTINATION'; // Who pays delivery fee
   startTick: number;
   durationTicks: number;        // e.g. 1440 ticks (24 hours)
   consecutiveBreaches: number;  // Tracks failures to deliver or pay
@@ -53,10 +52,10 @@ graph TD
     Start([Phase 1 Tick Begins]) --> Query[Query all ACTIVE B2B Contracts]
     Query --> CheckStock{Seller stock >= QtyPerTick<br>AND Quality >= MinQuality?}
     
-    CheckStock -- Yes --> CheckFunds{Buyer cash >= TotalCost<br>(Goods + Freight if FOB_ORIGIN)?}
+    CheckStock -- Yes --> CheckFunds{Buyer cash >= TotalCost<br>(Goods + Freight)?}
     CheckStock -- No --> BreachSeller[Increment Breach Counter<br>Levy Seller Penalty Fee]
     
-    CheckFunds -- Yes --> Transfer[Transfer Items to Buyer Facility<br>Transfer Cash to Seller<br>Deduct Freight Fee via Distance Graph]
+    CheckFunds -- Yes --> Transfer[Transfer Items to Buyer Facility<br>Transfer Cash to Seller<br>Deduct Freight Fee from Buyer via Distance Graph]
     CheckFunds -- No --> BreachBuyer[Increment Breach Counter<br>Levy Buyer Penalty Fee]
 
     Transfer --> ResetBreach[Reset Consecutive Breaches to 0]
@@ -69,11 +68,10 @@ graph TD
 
 ---
 
-## 3. Freight Terms & Delivery Mechanics
+## 3. Freight & Delivery Mechanics
 
-Because deliveries resolve instantly with distance fees (see [[delivery-and-freight]]), the contract explicitly assigns shipping liability:
-- **FOB Destination (Delivered)**: The **Seller** covers the freight cost from their facility to the buyer's destination. The buyer pays only $(\text{Qty} \times \text{UnitPrice})$.
-- **FOB Origin (Ex-Works)**: The **Buyer** covers the freight cost from the seller's facility to their own factory.
+Because deliveries resolve instantly with distance fees (see [[delivery-and-freight]]), shipping charges follow the universal rule:
+- **Buyer Always Pays Freight**: The **Buyer** covers the freight cost from the seller's facility to their own destination factory warehouse. The freight fee is deducted from the buyer's balance alongside the unit purchase price.
 
 Since freight fees are calculated via shortest-path distance $D[u, v]$, long-distance B2B contracts impose substantial recurring logistics overhead. Players are incentivized to seek local suppliers within their immediate province (see [[starter-province-map]]).
 

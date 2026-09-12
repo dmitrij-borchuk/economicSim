@@ -64,7 +64,7 @@ All REST requests require the `Authorization: Bearer <JWT_TOKEN>` header unless 
   - Returns active inbound and outbound [[b2b-contracts]].
 - `POST /api/contracts/propose`
   - Sends a recurring supply proposal to another company.
-  - Payload: `{ recipientCompanyId, sourceFacilityId, destFacilityId, itemType, qtyPerTick, unitPrice, minQuality, freightTerms, durationTicks }`
+  - Payload: `{ recipientCompanyId, sourceFacilityId, destFacilityId, itemType, qtyPerTick, unitPrice, minQuality, durationTicks }`
 - `POST /api/contracts/:id/accept`
   - Activates the proposed contract for execution in [[simulation-tick-loop|Tick Phase 1]].
 

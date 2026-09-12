@@ -57,7 +57,7 @@ graph TD
   1. The engine queries all active [[b2b-contracts]].
   2. For each contract, it verifies that the supplier facility has sufficient inventory meeting the minimum quality threshold $Q \ge Q_{\text{min}}$.
   3. Goods are transferred instantly from seller inventory to buyer inventory.
-  4. The distance freight fee is computed via [[delivery-and-freight]] and deducted from the buyer (or seller, depending on contract terms).
+  4. The distance freight fee is computed via [[delivery-and-freight]] and deducted from the buyer.
   5. The agreed purchase price $(P \times \text{Quantity})$ is transferred from buyer to seller.
 - **Failures**: If inventory or funds are insufficient, a contract breach flag is recorded for that tick.
 

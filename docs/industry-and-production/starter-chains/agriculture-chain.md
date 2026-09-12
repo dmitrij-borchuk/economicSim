@@ -38,9 +38,7 @@ graph LR
 - **Facility**: `GRAIN_FARM`
 - **Location**: Installed on `node_verdant_fields` or local arable land.
 - **Deposit Yield**: Base $20\text{ units/tick} \times 1.4\text{ (Verdant Fields)} = \mathbf{28\text{ units of Grain/tick}}$ at Level 1.
-- **Natural Quality**: $Q = 55.0$.
 - **Unit Cargo Weight**: $25\text{ kg/unit}$ (see [[delivery-and-freight]]).
-- **Operating Cost**: $25\text{ Cr/tick}$.
 - **Unit Marginal Cost**: $\approx 0.89\text{ Cr/unit}$ of Grain.
 
 ### Tier 2: Flour Milling
@@ -50,9 +48,7 @@ graph LR
   - Inputs: $2\times \text{GRAIN}$ ($w_1 = 1.0$)
   - Outputs: $1\times \text{FLOUR}$
   - Batch Capacity: $1\text{ batch/tick}$ per facility level ($2\text{ Grain} \to 1\text{ Flour}$).
-- **Output Quality**: $Q_{\text{flour}} = Q_{\text{grain}} \times (1 + \text{TechBonus})$.
 - **Unit Cargo Weight**: $25\text{ kg/unit}$.
-- **Operating Cost**: $20\text{ Cr/tick}$.
 
 ### Tier 3: Baking (Finished Consumer Good)
 - **Facility**: `BAKERY`
@@ -61,9 +57,7 @@ graph LR
   - Inputs: $1\times \text{FLOUR}$ ($w_1 = 1.0$)
   - Outputs: $2\times \text{BREAD}$
   - Batch Capacity: $1\text{ batch/tick}$ per level ($1\text{ Flour} \to 2\text{ Bread}$).
-- **Output Quality**: $Q_{\text{bread}} = Q_{\text{flour}} \times (1 + \text{TechBonus})$.
 - **Unit Cargo Weight**: $10\text{ kg/unit}$.
-- **Operating Cost**: $30\text{ Cr/tick}$.
 
 ---
 
