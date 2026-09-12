@@ -24,7 +24,7 @@ For the deposit locations and yield factors in the starter world, see [[starter-
 In Phase 1 of the simulation:
 - **Infinite Reserves**: Resource deposit nodes possess unlimited total reserves. Deposits do not deplete or exhaust, ensuring stable early-game industrial cycles.
 - **Regional Specialization**: Resource nodes feature region-specific yield multipliers ($Y_{\text{region}}$). A rich iron vein produces 50% more ore per tick than an ordinary node, incentivizing players to establish operations in strategically advantageous locations.
-- **Material-Only Model**: Extractors require no labor (workers) or electrical power grids in Phase 1. They operate continuously as long as the owning company pays the per-tick maintenance and land lease fee.
+- **Material-Only Model**: Extractors require no labor (workers) or electrical power grids in Phase 1. They operate continuously once constructed on an available deposit plot.
 
 ---
 
@@ -51,23 +51,23 @@ Where:
 
 ## 3. Starter Extraction Facilities Directory
 
-| Facility Type | Required Deposit | Base Yield ($\text{units/tick}$) | Required Equipment | Base Maintenance | Primary Outputs |
-|---|---|---|---|---|---|
-| **Grain Farm** | `GRAIN` | $20\text{ units}$ | Agricultural Tools / Harvester | $25\text{ Cr/tick}$ | `GRAIN` |
-| **Lumber Camp** | `TIMBER` | $15\text{ units}$ | Logging Axes / Saws | $20\text{ Cr/tick}$ | `TIMBER` |
-| **Iron Mine** | `IRON_ORE` | $10\text{ units}$ | Mining Picks / Drills | $40\text{ Cr/tick}$ | `IRON_ORE` |
-| **Stone Quarry** | `STONE` | $15\text{ units}$ | Quarrying Chisels / Saws | $25\text{ Cr/tick}$ | `STONE` |
+| Facility Type    | Required Deposit | Base Yield ($\text{units/tick}$) | Required Equipment             | Primary Outputs |
+| ---------------- | ---------------- | -------------------------------- | ------------------------------ | --------------- |
+| **Grain Farm**   | `GRAIN`          | $20\text{ units}$                | Agricultural Tools / Harvester | `GRAIN`         |
+| **Lumber Camp**  | `TIMBER`         | $15\text{ units}$                | Logging Axes / Saws            | `TIMBER`        |
+| **Iron Mine**    | `IRON_ORE`       | $10\text{ units}$                | Mining Picks / Drills          | `IRON_ORE`      |
+| **Stone Quarry** | `STONE`          | $15\text{ units}$                | Quarrying Chisels / Saws       | `STONE`         |
 
 > [!NOTE]
 > Higher quality equipment produces higher quality raw harvests. If a facility operates without specialized equipment, it utilizes standard baseline starter tools ($Q_{\text{equipment}} = 50.0$).
 
 ---
 
-## 4. Plot Leasing & Capacity Limits
+## 4. Plot Capacity Limits
 
 To prevent infinite clustering of facilities on a single resource node:
 - Each resource deposit has a maximum number of **Extraction Plots** (e.g., $10$ plots per node).
-- A player must pay a one-time plot lease fee or an ongoing municipal land lease ($10\text{ Cr/tick}$) to anchor a facility.
+- Facilities occupy an available plot upon construction without any lease fees; once all plots on a deposit are claimed, no additional facilities can be anchored there.
 - As the world matures, unclaimed plots become scarce, driving competition and territorial expansion across other regions of the planet (see [[spatial-graph-model]]).
 
 ---

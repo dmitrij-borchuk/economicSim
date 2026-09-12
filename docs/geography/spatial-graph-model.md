@@ -48,7 +48,7 @@ Every vertex represents a discrete geographic location where economic activity o
    - Reference: [[settlement-consumer-demand]], [[spot-exchange-orderbooks]].
 2. **Resource Deposit Nodes ($V_{\text{deposit}}$)**:
    - Natural extraction sites where raw commodities exist in unlimited supply with varying extraction yields.
-   - Players lease plots to build extraction facilities (farms, mines, logging camps).
+   - Players claim plots to build extraction facilities (farms, mines, logging camps).
    - Reference: [[resource-extraction]].
 
 ### Edges ($E$)

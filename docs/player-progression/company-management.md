@@ -16,7 +16,8 @@ created: 2026-09-12
 In the economic simulator, players act as Chief Executive Officers of an incorporated enterprise (`Company`). Every facility, warehouse, market order, and contract is owned and financed by the corporate balance sheet.
 
 For founding details, see [[onboarding-and-licenses]].
-For operational maintenance fees, see [[transformation-chains]] and [[resource-extraction]].
+For operational maintenance fees, see [[transformation-chains]].
+For extraction plot capacity limits, see [[resource-extraction]].
 For execution of accounting in the tick lifecycle, see [[simulation-tick-loop|Tick Phase 7]].
 
 ---
@@ -53,8 +54,7 @@ $$\text{NetProfit} = \text{TotalRevenue} - \text{TotalOperatingExpenses}$$
 - **Expenses**:
   - `InputMaterialPurchases`: Sourced commodities.
   - `LogisticsFreightFees`: Distance shipping fees from [[delivery-and-freight]].
-  - `FacilityMaintenance`: Base upkeep fees per facility level.
-  - `LandLeases`: Ongoing rental charges for deposit plots.
+  - `FacilityMaintenance`: Base upkeep fees per processing facility level.
   - `MarketExchangeFees`: $2.0\%$ exchange levy on spot market sales.
 
 ---
