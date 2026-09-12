@@ -190,16 +190,16 @@
   },
   "active": "56ce5db9601638c6",
   "lastOpenFiles": [
+    "geography/delivery-and-freight.md",
+    "index.md",
+    "geography/spatial-graph-model.md",
     "plans/task.md",
     "plans/2026-09-12-remove-corridor-types-design.md",
     "plans",
     "plans/2026-09-12-remove-corridor-types.md",
-    "geography/spatial-graph-model.md",
     "geography/starter-province-map.md",
     "plans/2026-09-12-obsidian-docs-generation.md",
     "plans/2026-09-12-economic-simulator-design.md",
-    "geography/delivery-and-freight.md",
-    "index.md",
     "core-engine/simulation-tick-loop.md",
     "core-engine/configuration-and-parameters.md"
   ]
