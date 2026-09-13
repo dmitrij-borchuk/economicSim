@@ -16,6 +16,8 @@ Welcome to the central design and architecture repository for the **Multiplayer 
 
 This knowledge base is authored in **Obsidian-flavored Markdown** with bidirectional wikilinks, mathematical modeling formulations, and technical implementation blueprints. It covers both game design mechanics and the software engineering architecture required to run the persistent server engine and interactive web client.
 
+Inspiration: Prosperous Universe, Virtonomics
+
 ---
 
 ## 🗺️ System Architecture & Subsystems Map
