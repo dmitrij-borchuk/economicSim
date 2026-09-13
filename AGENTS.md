@@ -12,6 +12,7 @@ This repository is a monorepo-style structure consisting of two primary software
 economicSim/
 ├── AGENTS.md           # Master agent instructions & conventions (this file)
 ├── docs/               # Obsidian-compatible game-design & architecture specs
+│   ├── AGENTS.md       # Documentation & spec agent instructions
 │   └── index.md        # Master Map of Content (MOC)
 ├── server/             # Backend simulation engine & API (NestJS + TypeScript)
 │   └── AGENTS.md       # Server-specific agent instructions
@@ -20,6 +21,7 @@ economicSim/
 ```
 
 ### Context Isolation
+- **Documentation & Specifications**: Work inside [`docs/`](./docs). Follow instructions in [`docs/AGENTS.md`](./docs/AGENTS.md).
 - **Backend / Simulation Engine**: Work inside [`server/`](./server). Follow instructions in [`server/AGENTS.md`](./server/AGENTS.md).
 - **Frontend / Client Application**: Work inside [`web/`](./web). Follow instructions in [`web/AGENTS.md`](./web/AGENTS.md).
 - **Domain Mechanics & Formulas**: Consult [`docs/`](./docs) for canonical specifications on tick pacing, orderbook matching, spatial logistics formulas, and production chains before implementing game logic.
