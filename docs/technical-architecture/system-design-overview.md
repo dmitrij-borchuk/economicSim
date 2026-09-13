@@ -28,11 +28,11 @@ For simulation cycle details, see [[simulation-tick-loop]].
 ```mermaid
 graph TD
     subgraph Client Layer
-        WebClient[React 18 + Vite Web App<br>Zustand + Canvas Map]
+        WebClient[React + Vite Web App<br>Zustand + Canvas Map]
     end
 
     subgraph API & Gateway Layer
-        FastifyServer[Fastify Node.js / Bun Server<br>REST Endpoints + WebSocket Gateway]
+        Server[NestJS Server<br>REST Endpoints + WebSocket Gateway]
     end
 
     subgraph Simulation & State Layer
@@ -45,14 +45,14 @@ graph TD
         Postgres[(PostgreSQL via Prisma ORM<br>Cold Storage & History)]
     end
 
-    WebClient <== HTTP / REST ==> FastifyServer
-    WebClient <== WebSocket Events ==> FastifyServer
-    FastifyServer -->|Push Player Actions| ActionQueue
+    WebClient <== HTTP / REST ==> Server
+    WebClient <== WebSocket Events ==> Server
+    Server -->|Push Player Actions| ActionQueue
     ActionQueue -->|Read Batched Actions| TickRunner
     TickRunner <== Read / Write State ==> RedisState
     TickRunner -->|Snapshot Every N Ticks| Postgres
-    TickRunner -->|Publish Tick Delta| FastifyServer
-    FastifyServer -->|Broadcast WebSocket Diff| WebClient
+    TickRunner -->|Publish Tick Delta| Server
+    Server -->|Broadcast WebSocket Diff| WebClient
 ```
 
 ---
@@ -60,7 +60,7 @@ graph TD
 ## 2. Core Subsystems & Responsibilities
 
 ### 1. Web Client (Frontend)
-- **Framework**: React 18+ with TypeScript, bundled via Vite.
+- **Framework**: React + with TypeScript, bundled via Vite.
 - **State Management**: Zustand for UI state and cached tick snapshots; TanStack Query for asynchronous data fetching.
 - **Interactive Map**: SVG/HTML5 Canvas renderer displaying the [[starter-province-map|Oakhaven Basin]] node graph, animated supply lines, and facility icons.
 - **Real-Time Client**: Reconnecting WebSocket subscriber listening for `tick_completed` broadcasts.
