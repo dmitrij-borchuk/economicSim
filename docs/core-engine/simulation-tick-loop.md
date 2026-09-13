@@ -106,7 +106,7 @@ graph TD
 - **Mechanism**:
   1. Deduct facility base operating maintenance costs from company cash reserves.
   2. Calculate company net worth, revenue, and profit/loss statements as detailed in [[company-management]].
-  3. Persist the updated state to PostgreSQL and Redis (see [[system-design-overview]]).
+  3. Persist the updated state to the persistence layer (see [[system-design-overview]]).
   4. Package tick deltas (executed trades, production results, cash changes) and broadcast via WebSocket to connected web clients (see [[api-and-websocket-protocol]]).
 
 ---

@@ -96,8 +96,8 @@ graph TD
 
 ### 6. 💻 Technical Software Architecture
 *Full-stack engineering implementation details and wire protocols.*
-- [[system-design-overview]]: Fastify + PostgreSQL/Prisma + Redis + React/Vite full-stack system topology.
-- [[data-schemas]]: Complete Prisma relational schemas and shared TypeScript domain models.
+- [[system-design-overview]]: Full-stack simulation architecture and system topology.
+- [[data-schemas]]: Entity schemas and shared TypeScript domain models.
 - [[api-and-websocket-protocol]]: REST API endpoints and real-time WebSocket tick broadcast specifications.
 - [[ui-design-system]]: Hard sci-fi industrial telemetry design system, color palette, and typography tokens.
 
@@ -113,5 +113,5 @@ graph TD
 | **Consumer Utility** | [[settlement-consumer-demand]] | $U = \frac{Q^{0.6}}{P^{0.9}}$ | [[spot-exchange-orderbooks]] |
 | **Upgrade Sink** | [[capital-construction-sink]] | $\text{Tools} = 2L, \text{Bricks} = 4L, \text{Planks} = 4L$ | [[metallurgy-construction-chain]] |
 | **B2B Contracts** | [[b2b-contracts]] | Evaluated prior to spot trading | [[delivery-and-freight]] |
-| **Tech Schema** | [[data-schemas]] | Shared TypeScript + Prisma ORM | [[system-design-overview]] |
+| **Tech Schema** | [[data-schemas]] | Shared TypeScript domain schemas | [[system-design-overview]] |
 | **UI Design System** | [[ui-design-system]] | Telemetry tokens & dual-state palette | [[system-design-overview]] |

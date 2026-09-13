@@ -12,23 +12,18 @@ status: approved
 created: 2026-09-12
 ---
 
-# Relational Data Schemas & TypeScript Domain Models
+# Data Schemas & TypeScript Domain Models
 
-This document specifies the database schemas (managed via **Prisma ORM** for PostgreSQL) and the shared **TypeScript domain interfaces** used across both the backend server and web frontend.
+This document specifies the core entity schemas and the shared **TypeScript domain interfaces** used across both the backend server and web frontend.
 
 For system architecture context, see [[system-design-overview]].
 For API endpoints and WebSocket messages using these models, see [[api-and-websocket-protocol]].
 
 ---
 
-## 1. Prisma ORM Database Schema (`schema.prisma`)
+## 1. Entity & Data Schema Definition (`schema.prisma`)
 
 ```prisma
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -235,7 +230,7 @@ export interface TickStateDelta {
 ---
 
 ## Related Notes
-- [[system-design-overview]] - How these models flow through Redis and PostgreSQL.
+- [[system-design-overview]] - How these models flow through the system architecture.
 - [[api-and-websocket-protocol]] - Network wire formats using these models.
 - [[company-management]] - Company fields and accounting ledger.
 - [[spot-exchange-orderbooks]] - Order models and double auction storage.

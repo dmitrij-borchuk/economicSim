@@ -97,8 +97,6 @@ SIM_TICK_DURATION_SECONDS=60
 SIM_LOGISTICS_BASE_FREIGHT=0.005
 SIM_MARKET_FEE_RATE=0.02
 SIM_STARTER_CASH=25000
-DATABASE_URL="postgresql://user:password@localhost:5432/economicsim"
-REDIS_URL="redis://localhost:6379"
 ```
 
 ---

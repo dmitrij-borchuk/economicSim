@@ -91,7 +91,7 @@ Since the graph $G$ consists of several dozen to several hundred nodes in early-
 
 $$D[u, v] = \min_{p \in \mathcal{P}(u, v)} \sum_{e \in p} d(e)$$
 
-The pre-computed distance matrix is stored in Redis / Server Memory. Whenever a trade, delivery, or B2B supply contract resolves, distance lookups execute in $O(1)$ time complexity.
+The pre-computed distance matrix is stored in Server Memory. Whenever a trade, delivery, or B2B supply contract resolves, distance lookups execute in $O(1)$ time complexity.
 
 ---
 

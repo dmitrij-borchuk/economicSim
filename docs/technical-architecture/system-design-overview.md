@@ -6,8 +6,7 @@ tags:
   - backend
   - frontend
   - typescript
-  - redis
-  - postgresql
+  - firebase
 type: specification
 status: approved
 created: 2026-09-12
@@ -36,21 +35,21 @@ graph TD
     end
 
     subgraph Simulation & State Layer
-        ActionQueue[(Redis Action Queue<br>Player Commands)]
+        ActionQueue[(Action Queue<br>Player Commands)]
         TickRunner[Tick Runner Daemon<br>7-Phase Execution Loop]
-        RedisState[(Redis In-Memory State<br>Order Books & Graph Distance Matrix)]
+        SimState[(In-Memory Simulation State<br>Order Books & Graph Distance Matrix)]
     end
 
-    subgraph Persistence Layer
-        Postgres[(PostgreSQL via Prisma ORM<br>Cold Storage & History)]
+    subgraph Persistence & Real-time Layer
+        Firebase[(Firebase<br>Firestore & Auth Snapshots)]
     end
 
     WebClient <== HTTP / REST ==> Server
     WebClient <== WebSocket Events ==> Server
     Server -->|Push Player Actions| ActionQueue
     ActionQueue -->|Read Batched Actions| TickRunner
-    TickRunner <== Read / Write State ==> RedisState
-    TickRunner -->|Snapshot Every N Ticks| Postgres
+    TickRunner <== Read / Write State ==> SimState
+    TickRunner -->|Snapshot Every N Ticks| Firebase
     TickRunner -->|Publish Tick Delta| Server
     Server -->|Broadcast WebSocket Diff| WebClient
 ```
@@ -69,24 +68,25 @@ graph TD
 - **Runtime**: Node.js (v20+) or Bun.
 - **HTTP Routing**: Fastify with JSON Schema validation (`typebox` / `zod`) for lightning-fast request parsing.
 - **Authentication**: JWT-based session tokens associating requests with a verified `CompanyId`.
-- **Command Ingestion**: Non-blocking endpoint handling. When a player builds a facility or places an order, the command is validated and appended to the **Redis Action Queue** (`sim:actions:pending`) for inclusion in the upcoming tick.
+- **Command Ingestion**: Non-blocking endpoint handling. When a player builds a facility or places an order, the command is validated and appended to the **Action Queue** (`sim:actions:pending`) for inclusion in the upcoming tick.
 
 ### 3. Tick Runner Daemon (Simulation Engine)
 - **Execution Model**: Runs as an isolated worker process or cron scheduler ticking precisely at the configured interval $\Delta t_{\text{tick}}$ (see [[configuration-and-parameters]]).
 - **Batch Processing**: At the tick boundary:
   1. Closes the current action queue.
   2. Executes the deterministic 7-phase lifecycle (see [[simulation-tick-loop]]).
-  3. Mutates in-memory state in Redis.
+  3. Mutates in-memory simulation state.
   4. Generates a compressed delta diff of all state changes.
-  5. Publishes the diff to Redis Pub/Sub (`sim:events:ticks`).
+  5. Publishes the diff to the gateway event bus (`sim:events:ticks`).
 
-### 4. Persistence & In-Memory Storage
-- **Redis (Fast Cache & Message Bus)**:
-  - Stores all active order books, shortest-path distance matrices, and active tick counter.
-  - Acts as a high-speed message broker between the Tick Runner and multiple Fastify WebSocket gateway instances.
-- **PostgreSQL (System of Record)**:
-  - Relational persistence managed via **Prisma ORM**.
-  - Stores user credentials, company legal records, facility configurations, transaction audit logs, and tick checkpoint snapshots.
+### 4. Persistence & Storage (Firebase Phase)
+- **Firebase (Persistence & System of Record)**:
+  - Serves as the primary system of record and cloud persistence layer for this phase.
+  - Stores user credentials, company records, facility configurations, transaction audit logs, and periodic tick checkpoint snapshots in Firestore.
+  - Handles authentication and cloud state synchronization.
+- **In-Memory Simulation State**:
+  - Maintains all active order books, shortest-path distance matrices, and the active tick counter in memory for low-latency tick execution.
+  - Flushes periodic snapshots to Firebase at configured tick boundaries.
 
 ---
 
@@ -108,7 +108,7 @@ When expanding from the Oakhaven Basin starter province to the entire planet:
 ---
 
 ## Related Notes
-- [[data-schemas]] - TypeScript and Prisma relational schema definitions.
+- [[data-schemas]] - TypeScript and entity schema definitions.
 - [[api-and-websocket-protocol]] - REST API routes and WebSocket message schemas.
 - [[simulation-tick-loop]] - The 7-phase tick lifecycle executed by the runner.
 - [[configuration-and-parameters]] - Server configuration options.

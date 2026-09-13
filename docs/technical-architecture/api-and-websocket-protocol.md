@@ -79,14 +79,14 @@ The WebSocket connection delivers real-time notifications to the client as each 
 sequenceDiagram
     participant Client as React Web Client
     participant WS as Fastify WebSocket Gateway
-    participant Bus as Redis Pub/Sub
+    participant Bus as Simulation Event Bus
 
     Client->>WS: Connect: ws://localhost:3000/ws/simulation
     Client->>WS: Send Auth: { type: "AUTH", token: "<JWT>" }
     WS-->>Client: { type: "AUTH_OK", companyId: "comp-123" }
     
     Note over Bus,WS: Simulation Tick Completes
-    Bus->>WS: Redis Event: "sim:events:ticks"
+    Bus->>WS: Event: "sim:events:ticks"
     WS-->>Client: Broadcast: TICK_COMPLETED event
     WS-->>Client: Targeted: COMPANY_DELTA diff
 ```
