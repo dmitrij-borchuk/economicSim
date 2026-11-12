@@ -12,11 +12,15 @@ created: 2026-09-12
 
 # 🌐 Planetary Economic Simulator — Master Knowledge Vault
 
-Welcome to the central design and architecture repository for the **Multiplayer Step-Ticked Economic Management Simulator**. 
+Welcome to the central design and architecture repository for the **Multiplayer Step-Ticked Economic Management Simulator**.
 
 This knowledge base is authored in **Obsidian-flavored Markdown** with bidirectional wikilinks, mathematical modeling formulations, and technical implementation blueprints. It covers both game design mechanics and the software engineering architecture required to run the persistent server engine and interactive web client.
 
 Inspiration: Prosperous Universe, Virtonomics
+
+Design inspiration:
+
+<img src="./assets/designInspiration.jpg" />
 
 ---
 

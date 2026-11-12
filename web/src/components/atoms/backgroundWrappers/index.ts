@@ -1,0 +1,1 @@
+export { DarkPageBackground } from './DarkPageBackground';
