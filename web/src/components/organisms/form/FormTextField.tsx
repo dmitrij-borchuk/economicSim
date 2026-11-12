@@ -26,7 +26,6 @@ export function FormTextField<T extends FieldValues>({
   const parsedOptions = useRulesToDefaultMessage(options);
 
   return (
-    // @ts-expect-error TODO: fix typing
     <TextField
       {...props}
       required={required}

@@ -24,7 +24,7 @@ export interface CompanyProfile {
   cashBalance: number;
   reputation: number;
   userId: string;
-  starterLicenseId: string;
+  starterLicenseId?: string;
   startingNodeId: string;
   facilities?: FacilitySummary[];
   createdAt: string;

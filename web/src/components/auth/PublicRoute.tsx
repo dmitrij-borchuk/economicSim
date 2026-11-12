@@ -6,6 +6,7 @@ import { styled } from '@mui/material/styles';
 
 export const PublicRoute: React.FC = () => {
   const { isAuthenticated, hasCompany, isSessionChecking } = useAuth();
+  console.log("🚀 ~ PublicRoute ~ hasCompany:", hasCompany)
 
   if (isSessionChecking) {
     return (

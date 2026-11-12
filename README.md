@@ -77,6 +77,18 @@ Comprehensive system and game mechanics documentation is located in `docs/` :
 
 ---
 
+## Ideas
+
+- Event: Pandemic in the region user has options to close facilityes entirely (no people suffer, no production), close connections (some people suffer, no trading), do nothing (people may die)
+- Some events are related to several or all players e.g. diseases (more players close connections less time event will continue)
+
+---
+
 ## 🗺️ Roadmap
 
 - [ ] Subscription
+- [ ] Faf icon
+- [ ] AI generated company ID from name (use openrouter)
+
+## TODO:
+- [ ] Make a name for the application or terminal

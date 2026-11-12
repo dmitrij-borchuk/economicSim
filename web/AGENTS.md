@@ -59,6 +59,14 @@ Structure UI components following **Atomic Design** principles to ensure reusabi
   - **Templates**: Layout structures defining placement, grids, and responsiveness using component slots/props (`children`, `sidebar`, `header`). No direct data fetching.
   - **Pages**: The top-level composition layer where hooks, WebSocket subscriptions, and global context are wired into templates and organisms.
 
+- **Components writing rooles**:
+  - When more than 4 `sx` props are used, make separate styled component.
+  - Don't use default export for components.
+  - Try to decompose components to smaller
+  - Make smaller components as sharable if possible and put them in `molecules/` or `atoms/` folder.
+  - For every MUI component make wrapper in appropriate atoms or molecules folder.
+  - For the styling MUI components use themes.
+
 ### 3. Business & Domain Logic in `libs/`
 All application logic, data transformations, and state abstractions **must reside in `web/src/libs/` partitioned by feature**:
 - **Feature Subfolders**: Group logic by domain capability (e.g., `libs/orderbook/`, `libs/logistics/`, `libs/simulation/`, `libs/facilities/`).

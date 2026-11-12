@@ -1,2 +1,1 @@
-// Atomic Design: Templates catalog
-export {};
+export * from './DashboardTemplate';

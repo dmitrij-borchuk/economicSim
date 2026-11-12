@@ -4,5 +4,6 @@ export * from './dataDisplay';
 export * from './feedback';
 export * from './inputs';
 export * from './surfaces';
+export * from './hud';
 
 
