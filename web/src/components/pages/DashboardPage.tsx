@@ -10,6 +10,7 @@ import {
   FooterTelemetryTable,
 } from '@/organisms';
 import { FooterInfoBar } from '@/molecules';
+import { UnderConstructionOverlay } from '../atoms';
 
 export const DashboardPage: React.FC = () => {
   const { company } = useAuth();
@@ -37,32 +38,38 @@ export const DashboardPage: React.FC = () => {
       header={<HudHeader />}
       telemetry={
         <>
-          <NodeTelemetryCard nodeId={company.startingNodeId} />
-          <TreasuryTelemetryCard
-            cashBalance={company.cashBalance}
-            companyName={company.name}
-            franchise={franchise}
-            reputation={company.reputation ?? 100}
-            consoleActive={Boolean(codeConsoleActive['treasury'])}
-            onToggleConsole={() => toggleConsole('treasury')}
-          />
+          <UnderConstructionOverlay>
+            <NodeTelemetryCard nodeId={company.startingNodeId} />
+            <TreasuryTelemetryCard
+              cashBalance={company.cashBalance}
+              companyName={company.name}
+              franchise={franchise}
+              reputation={company.reputation ?? 100}
+              consoleActive={Boolean(codeConsoleActive['treasury'])}
+              onToggleConsole={() => toggleConsole('treasury')}
+            />
+          </UnderConstructionOverlay>
         </>
       }
       terminalStream={
-        <TerminalStreamSection
-          startingNodeId={company.startingNodeId}
-          licenseName={franchise}
-        />
+        <UnderConstructionOverlay>
+          <TerminalStreamSection
+            startingNodeId={company.startingNodeId}
+            licenseName={franchise}
+          />
+        </UnderConstructionOverlay>
       }
       schematic={
-        <SubSchematicSection
-          selectedSec={selectedSec}
-          onSelectSec={setSelectedSec}
-          codeConsoleActive={codeConsoleActive}
-          onToggleConsole={toggleConsole}
-        />
+        <UnderConstructionOverlay>
+          <SubSchematicSection
+            selectedSec={selectedSec}
+            onSelectSec={setSelectedSec}
+            codeConsoleActive={codeConsoleActive}
+            onToggleConsole={toggleConsole}
+          />
+        </UnderConstructionOverlay>
       }
-      footer={<FooterTelemetryTable />}
+      footer={<UnderConstructionOverlay><FooterTelemetryTable /></UnderConstructionOverlay>}
       footerInfo={<FooterInfoBar currentDirectory={currentDirectory} />}
     />
   );

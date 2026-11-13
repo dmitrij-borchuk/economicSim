@@ -1,2 +1,4 @@
 docs/.obsidian/workspace.json
 web/.env
+server/firebase-adminsdk-creds.json
+server/tsconfig.build.tsbuildinfo

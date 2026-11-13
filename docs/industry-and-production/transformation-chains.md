@@ -10,7 +10,6 @@ type: specification
 status: approved
 created: 2026-09-12
 ---
-
 # Industrial Transformation & Recipe Chains
 
 Industrial transformation facilities process raw commodities and intermediate goods into refined products, capital equipment, and consumer goods. Transformation operations execute during [[simulation-tick-loop|Tick Phase 3]].
@@ -57,16 +56,16 @@ export interface Recipe {
 
 ## 2. Transformation Facilities Summary Table
 
-| Facility | Inputs Required per Batch | Outputs per Batch | Base Maintenance | Sector |
-|---|---|---|---|---|
-| **Flour Mill** | $2\times \text{Grain}$ | $1\times \text{Flour}$ | $20\text{ Cr/tick}$ | [[agriculture-chain]] |
-| **Bakery** | $1\times \text{Flour}$ | $2\times \text{Bread}$ | $30\text{ Cr/tick}$ | [[agriculture-chain]] |
-| **Sawmill** | $2\times \text{Timber}$ | $2\times \text{Planks}$ | $25\text{ Cr/tick}$ | [[forestry-chain]] |
-| **Carpentry Workshop** | $2\times \text{Planks}$ | $1\times \text{Furniture}$ | $35\text{ Cr/tick}$ | [[forestry-chain]] |
-| **Smelter** | $2\times \text{Iron Ore}$ | $1\times \text{Iron Ingot}$ | $50\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
-| **Brick Kiln** | $2\times \text{Stone}$ | $2\times \text{Bricks}$ | $30\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
-| **Toolsmith** | $1\times \text{Iron Ingot} + 1\times \text{Plank}$ | $2\times \text{Tools}$ | $45\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
-| **Construction Yard** | $2\times \text{Iron Ingot} + 4\times \text{Bricks} + 4\times \text{Planks}$ | $1\times \text{Building Kit}$ | $60\text{ Cr/tick}$ | [[capital-construction-sink]] |
+| Facility               | Inputs Required per Batch                                                   | Outputs per Batch             | Base Maintenance    | Sector                            |
+| ---------------------- | --------------------------------------------------------------------------- | ----------------------------- | ------------------- | --------------------------------- |
+| **Flour Mill**         | $2\times \text{Grain}$                                                      | $1\times \text{Flour}$        | $20\text{ Cr/tick}$ | [[agriculture-chain]]             |
+| **Bakery**             | $1\times \text{Flour}$                                                      | $2\times \text{Bread}$        | $30\text{ Cr/tick}$ | [[agriculture-chain]]             |
+| **Sawmill**            | $2\times \text{Timber}$                                                     | $2\times \text{Planks}$       | $25\text{ Cr/tick}$ | [[forestry-chain]]                |
+| **Carpentry Workshop** | $2\times \text{Planks}$                                                     | $1\times \text{Furniture}$    | $35\text{ Cr/tick}$ | [[forestry-chain]]                |
+| **Smelter**            | $2\times \text{Iron Ore}$                                                   | $1\times \text{Iron Ingot}$   | $50\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
+| **Brick Kiln**         | $2\times \text{Stone}$                                                      | $2\times \text{Bricks}$       | $30\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
+| **Toolsmith**          | $1\times \text{Iron Ingot} + 1\times \text{Plank}$                          | $2\times \text{Tools}$        | $45\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
+| **Construction Yard**  | $2\times \text{Iron Ingot} + 4\times \text{Bricks} + 4\times \text{Planks}$ | $1\times \text{Building Kit}$ | $60\text{ Cr/tick}$ | [[capital-construction-sink]]     |
 
 ---
 

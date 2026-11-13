@@ -9,7 +9,6 @@ type: specification
 status: approved
 created: 2026-09-12
 ---
-
 # Resource Extraction & Harvesting
 
 Resource extraction represents the primary supply generation layer of the economy. Extraction facilities gather raw commodities directly from natural deposit nodes across the spatial graph during [[simulation-tick-loop|Tick Phase 2]].

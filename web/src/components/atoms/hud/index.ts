@@ -7,3 +7,4 @@ export * from './SectorMetricTag';
 export * from './SecondarySwitch';
 export * from './FaderTrack';
 export * from './SegmentedBarDisplay';
+export * from './UnderConstructionOverlay';
