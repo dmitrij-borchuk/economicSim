@@ -35,7 +35,7 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <DashboardTemplate
-      header={<HudHeader />}
+      header={<UnderConstructionOverlay><HudHeader /></UnderConstructionOverlay>}
       telemetry={
         <>
           <UnderConstructionOverlay>
