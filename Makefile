@@ -1,5 +1,8 @@
 ifeq ($(OS),Windows_NT)
 SHELL := cmd.exe
+STDIN_DEV := < NUL
+else
+STDIN_DEV := < /dev/null
 endif
 
 .PHONY: help install install-server install-web run dev run-server run-web build build-server build-web lint lint-server lint-web test
@@ -30,10 +33,10 @@ dev:
 	$(MAKE) -j2 run-server run-web
 
 run-server:
-	npm --prefix server run start:dev
+	npm --prefix server run start:dev $(STDIN_DEV)
 
 run-web:
-	npm --prefix web run dev
+	npm --prefix web run dev $(STDIN_DEV)
 
 build: build-server build-web
 
