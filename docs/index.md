@@ -61,7 +61,6 @@ graph TD
     TECH --> T2[[data-schemas]]
     TECH --> T3[[api-and-websocket-protocol]]
     TECH --> T4[[ui-design-system]]
-    TECH --> T5[[plan]]
 ```
 
 ---
@@ -69,18 +68,24 @@ graph TD
 ## 📚 Vault Contents by Domain
 
 ### 1. ⚙️ Core Engine & Pacing
-*Governs the temporal progression, atomic batch execution, and global tuning constants.*
+
+_Governs the temporal progression, atomic batch execution, and global tuning constants._
+
 - [[simulation-tick-loop]]: The server-authoritative 7-phase execution cycle running 24/7.
 - [[configuration-and-parameters]]: Config schema, tick duration options, freight rates, and market tax constants.
 
 ### 2. 🌍 Geography, Spatial Graph & Logistics
-*Defines how physical distance, terrain, and transport routes govern trade friction.*
+
+_Defines how physical distance, terrain, and transport routes govern trade friction._
+
 - [[spatial-graph-model]]: The topological node-and-edge graph $G = (V, E)$ scaling from local provinces to the globe.
 - [[starter-province-map]]: The concrete **Oakhaven Basin** starter territory (Port Oakhaven, Millbrook, Ironridge, Pinewood).
 - [[delivery-and-freight]]: The instantaneous shortest-path distance shipping fee formula and cargo weights.
 
 ### 3. 🏭 Industry, Quality & Production Chains
-*Raw material extraction, recipe transformations, and quality blending formulas.*
+
+_Raw material extraction, recipe transformations, and quality blending formulas._
+
 - [[resource-extraction]]: Gathering infinite primary commodities with regional yield modifiers.
 - [[transformation-chains]]: Recipe batch throughput, facility level scaling, and input consumption rules.
 - [[quality-system]]: The numeric $Q \in [1, 100]$ grading scale, volume-weighted blending math, and tech modifiers.
@@ -90,36 +95,41 @@ graph TD
   - [[metallurgy-construction-chain]]: Iron Ore & Stone $\to$ Ingots & Bricks $\to$ Tools & Building Kits (Capital Expansion).
 
 ### 4. 📈 Economy, Markets & Consumption Sinks
-*Price discovery, automated peer-to-peer pipelines, and macroeconomic circulation.*
+
+_Price discovery, automated peer-to-peer pipelines, and macroeconomic circulation._
+
 - [[spot-exchange-orderbooks]]: Continuous double auctions and limit order matching at regional trade hubs.
 - [[b2b-contracts]]: Long-term automated recurring supply agreements executed in Tick Phase 1.
 - [[settlement-consumer-demand]]: Civilian retail utility function $U(Q, P) = \frac{Q^{0.6}}{P^{0.9}}$ absorbing finished goods.
 - [[capital-construction-sink]]: The heavy industrial sink consuming Building Kits, Tools, and Bricks to build and upgrade facilities.
 
 ### 5. 👤 Player Onboarding & Enterprise Management
-*The corporate entity, balance sheets, and beginner experience.*
+
+_The corporate entity, balance sheets, and beginner experience._
+
 - [[onboarding-and-licenses]]: The Guided Franchise start (Agronomist, Forester, Industrialist) with pre-built facilities and starter capital.
 - [[company-management]]: Financial accounting, income statements, net worth formulas, and insolvency rules.
 
 ### 6. 💻 Technical Software Architecture
-*Full-stack engineering implementation details and wire protocols.*
+
+_Full-stack engineering implementation details and wire protocols._
+
 - [[system-design-overview]]: Full-stack simulation architecture and system topology.
 - [[data-schemas]]: Entity schemas and shared TypeScript domain models.
 - [[api-and-websocket-protocol]]: REST API endpoints and real-time WebSocket tick broadcast specifications.
 - [[ui-design-system]]: Hard sci-fi industrial telemetry design system, color palette, and typography tokens.
-- [[plan]]: Project delivery milestones and vertical-slice implementation roadmap.
 
 ---
 
 ## ⚡ Quick Navigation Index
 
-| Subsystem | Primary Document | Core Equation / Rule | Key Dependencies |
-|---|---|---|---|
-| **Tick Cycle** | [[simulation-tick-loop]] | $S_{T+1} = f(S_T, A_T)$ | [[configuration-and-parameters]] |
-| **Delivery Freight** | [[delivery-and-freight]] | $\text{Fee} = N \times W \times D[u, v] \times R_f$ | [[spatial-graph-model]] |
-| **Quality Blending** | [[quality-system]] | $Q_{\text{merged}} = \frac{\sum Qty_j \cdot Q_j}{\sum Qty_j}$ | [[transformation-chains]] |
-| **Consumer Utility** | [[settlement-consumer-demand]] | $U = \frac{Q^{0.6}}{P^{0.9}}$ | [[spot-exchange-orderbooks]] |
-| **Upgrade Sink** | [[capital-construction-sink]] | $\text{Tools} = 2L, \text{Bricks} = 4L, \text{Planks} = 4L$ | [[metallurgy-construction-chain]] |
-| **B2B Contracts** | [[b2b-contracts]] | Evaluated prior to spot trading | [[delivery-and-freight]] |
-| **Tech Schema** | [[data-schemas]] | Shared TypeScript domain schemas | [[system-design-overview]] |
-| **UI Design System** | [[ui-design-system]] | Telemetry tokens & dual-state palette | [[system-design-overview]] |
+| Subsystem            | Primary Document               | Core Equation / Rule                                          | Key Dependencies                  |
+| -------------------- | ------------------------------ | ------------------------------------------------------------- | --------------------------------- |
+| **Tick Cycle**       | [[simulation-tick-loop]]       | $S_{T+1} = f(S_T, A_T)$                                       | [[configuration-and-parameters]]  |
+| **Delivery Freight** | [[delivery-and-freight]]       | $\text{Fee} = N \times W \times D[u, v] \times R_f$           | [[spatial-graph-model]]           |
+| **Quality Blending** | [[quality-system]]             | $Q_{\text{merged}} = \frac{\sum Qty_j \cdot Q_j}{\sum Qty_j}$ | [[transformation-chains]]         |
+| **Consumer Utility** | [[settlement-consumer-demand]] | $U = \frac{Q^{0.6}}{P^{0.9}}$                                 | [[spot-exchange-orderbooks]]      |
+| **Upgrade Sink**     | [[capital-construction-sink]]  | $\text{Tools} = 2L, \text{Bricks} = 4L, \text{Planks} = 4L$   | [[metallurgy-construction-chain]] |
+| **B2B Contracts**    | [[b2b-contracts]]              | Evaluated prior to spot trading                               | [[delivery-and-freight]]          |
+| **Tech Schema**      | [[data-schemas]]               | Shared TypeScript domain schemas                              | [[system-design-overview]]        |
+| **UI Design System** | [[ui-design-system]]           | Telemetry tokens & dual-state palette                         | [[system-design-overview]]        |
