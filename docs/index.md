@@ -61,6 +61,7 @@ graph TD
     TECH --> T2[[data-schemas]]
     TECH --> T3[[api-and-websocket-protocol]]
     TECH --> T4[[ui-design-system]]
+    TECH --> T5[[plan]]
 ```
 
 ---
@@ -106,6 +107,7 @@ graph TD
 - [[data-schemas]]: Entity schemas and shared TypeScript domain models.
 - [[api-and-websocket-protocol]]: REST API endpoints and real-time WebSocket tick broadcast specifications.
 - [[ui-design-system]]: Hard sci-fi industrial telemetry design system, color palette, and typography tokens.
+- [[plan]]: Project delivery milestones and vertical-slice implementation roadmap.
 
 ---
 
