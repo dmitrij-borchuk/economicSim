@@ -6,7 +6,7 @@ import { store } from './libs/store/index.ts';
 import { App } from './App.tsx';
 import './index.css';
 
-// Initialize the Firebase Auth listener once globally
+// Initialize the auth session check once globally
 store.dispatch(initAuthListener());
 
 createRoot(document.getElementById('root')!).render(

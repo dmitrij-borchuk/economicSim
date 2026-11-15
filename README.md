@@ -100,3 +100,4 @@ Comprehensive system and game mechanics documentation is located in `docs/` :
 ## Tasks
 
 [] - Sometimes onboarding is loaded insted of dashboard (mayby only when server starts)
+[] - When the user swith from login to register the dialog should not show previus error from login

@@ -12,3 +12,4 @@
   - the main component properties type like `export type ComponentProps = {}` should be the first export of the file
   - the main component should be second export of the file
   - reuse existing components from `molecules` and `atoms` folders.
+  - Use component own props in first place instead of styled component where possible.

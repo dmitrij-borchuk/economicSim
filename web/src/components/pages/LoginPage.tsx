@@ -31,7 +31,7 @@ interface AuthFormValues {
 
 export const LoginPage: React.FC = () => {
   const { signInEmail, signUpEmail, signInGoogle, isLoading, error } = useAuth();
-  const { showError, showSuccess } = useNotification()
+  const { showError, showSuccess } = useNotification();
 
   const [tabIndex, setTabIndex] = useState<number>(0);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
@@ -51,7 +51,6 @@ export const LoginPage: React.FC = () => {
   };
 
   const onSubmit = async (values: AuthFormValues) => {
-
     try {
       if (tabIndex === 0) {
         await signInEmail(values.email, values.password);
@@ -60,7 +59,10 @@ export const LoginPage: React.FC = () => {
         showSuccess('Operator identifier registered successfully.');
       }
     } catch (err: unknown) {
-      const errorMsg = (err as Error)?.message || 'Authentication sequence failed.';
+      const errorMsg =
+        typeof err === 'string'
+          ? err
+          : (err as Error)?.message || 'Authentication sequence failed.';
       showError(errorMsg);
     }
   };
@@ -71,7 +73,10 @@ export const LoginPage: React.FC = () => {
       await signInGoogle();
       showSuccess('Google OAuth identity linked successfully.');
     } catch (err: unknown) {
-      const errorMsg = (err as Error)?.message || 'Federated OAuth link failed.';
+      const errorMsg =
+        typeof err === 'string'
+          ? err
+          : (err as Error)?.message || 'Federated OAuth link failed.';
       showError(errorMsg);
     } finally {
       setIsGoogleLoading(false);
@@ -112,7 +117,7 @@ export const LoginPage: React.FC = () => {
             <Tab icon={<PersonAddAltIcon fontSize="small" />} iconPosition="start" label="ENLIST" />
           </TerminalTabs>
 
-          {(error) && (
+          {error && (
             <Alert
               severity="error"
               sx={{

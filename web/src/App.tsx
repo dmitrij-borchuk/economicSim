@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { isFirebaseConfigured } from './libs/firebase/firebase';
 import { PublicRoute } from './components/auth/PublicRoute';
 import { OnboardingRoute } from './components/auth/OnboardingRoute';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
@@ -8,14 +7,6 @@ import { AppLayout } from './components/layout/AppLayout';
 import { LoginPage, OnboardingPage, DashboardPage } from '@/pages';
 
 export const App: React.FC = () => {
-  useEffect(() => {
-    if (!isFirebaseConfigured()) {
-      console.warn(
-        'Firebase is not configured. Please supply valid VITE_FIREBASE_* environment variables in .env.'
-      );
-    }
-  }, []);
-
   return (
     <Routes>
       {/* Public routes (accessible when unauthenticated) */}

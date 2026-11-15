@@ -1,19 +1,16 @@
 import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '../store';
 import {
-  setFirebaseUser,
-  fetchCurrentUserSession,
+  loginUser,
+  registerUser,
+  loginGoogleUser,
   submitCompanyOnboarding,
   signOutAction,
   clearAuthError,
   type OnboardCompanyPayload,
 } from '../store/authSlice';
-import {
-  loginWithEmail as fbLoginEmail,
-  registerWithEmail as fbRegisterEmail,
-  loginWithGoogle as fbLoginGoogle,
-  getCurrentIdToken,
-} from '../firebase/firebase';
+import { getStoredToken } from '../api/apiClient';
+import { loginWithGoogle as fbLoginGoogle } from '../firebase/firebase';
 
 export function useAuth() {
   const dispatch = useAppDispatch();
@@ -22,43 +19,17 @@ export function useAuth() {
   );
 
   const signInEmail = useCallback(
-    async (email: string, pass: string) => {
+    async (email: string, password: string) => {
       dispatch(clearAuthError());
-      const cred = await fbLoginEmail(email, pass);
-      const token = await cred.user.getIdToken();
-      dispatch(
-        setFirebaseUser({
-          user: {
-            uid: cred.user.uid,
-            email: cred.user.email,
-            displayName: cred.user.displayName,
-            photoURL: cred.user.photoURL,
-          },
-          idToken: token,
-        })
-      );
-      return dispatch(fetchCurrentUserSession()).unwrap();
+      return await dispatch(loginUser({ email, password })).unwrap();
     },
     [dispatch]
   );
 
   const signUpEmail = useCallback(
-    async (email: string, pass: string) => {
+    async (email: string, password: string) => {
       dispatch(clearAuthError());
-      const cred = await fbRegisterEmail(email, pass);
-      const token = await cred.user.getIdToken();
-      dispatch(
-        setFirebaseUser({
-          user: {
-            uid: cred.user.uid,
-            email: cred.user.email,
-            displayName: cred.user.displayName,
-            photoURL: cred.user.photoURL,
-          },
-          idToken: token,
-        })
-      );
-      return dispatch(fetchCurrentUserSession()).unwrap();
+      return await dispatch(registerUser({ email, password })).unwrap();
     },
     [dispatch]
   );
@@ -67,18 +38,7 @@ export function useAuth() {
     dispatch(clearAuthError());
     const cred = await fbLoginGoogle();
     const token = await cred.user.getIdToken();
-    dispatch(
-      setFirebaseUser({
-        user: {
-          uid: cred.user.uid,
-          email: cred.user.email,
-          displayName: cred.user.displayName,
-          photoURL: cred.user.photoURL,
-        },
-        idToken: token,
-      })
-    );
-    return dispatch(fetchCurrentUserSession()).unwrap();
+    return await dispatch(loginGoogleUser(token)).unwrap();
   }, [dispatch]);
 
   const signOut = useCallback(async () => {
@@ -91,6 +51,10 @@ export function useAuth() {
     },
     [dispatch]
   );
+
+  const getIdToken = useCallback(async () => {
+    return getStoredToken();
+  }, []);
 
   return {
     user,
@@ -106,7 +70,7 @@ export function useAuth() {
     signInGoogle,
     signOut,
     onboardCompany,
-    getIdToken: getCurrentIdToken,
+    getIdToken,
   };
 }
 
