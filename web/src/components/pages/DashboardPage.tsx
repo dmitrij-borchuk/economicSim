@@ -3,6 +3,7 @@ import { useAuth } from "@/libs/auth/useAuth";
 import { PageTemplate } from "@/templates";
 import {
   HudHeader,
+  CompanyOverviewCard,
   NodeTelemetryCard,
   TreasuryTelemetryCard,
   TerminalStreamSection,
@@ -10,7 +11,7 @@ import {
   FooterTelemetryTable,
 } from "@/organisms";
 import { FooterInfoBar } from "@/molecules";
-import { Box, UnderConstructionOverlay } from "../atoms";
+import { Box, Flex, UnderConstructionOverlay } from "../atoms";
 import { styled } from "@/libs/styled";
 
 export const DashboardPage: React.FC = () => {
@@ -41,40 +42,43 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <PageTemplate>
-      <UnderConstructionOverlay>
-        <HudHeader />
-      </UnderConstructionOverlay>
-      <TelemetrySection>
+      <Flex column gap={2}>
+        <CompanyOverviewCard company={company} franchise={franchise} />
         <UnderConstructionOverlay>
-          <NodeTelemetryCard nodeId={company.startingNodeId} />
-          <TreasuryTelemetryCard
-            cashBalance={company.cashBalance}
-            companyName={company.name}
-            franchise={franchise}
-            reputation={company.reputation ?? 100}
-            consoleActive={Boolean(codeConsoleActive["treasury"])}
-            onToggleConsole={() => toggleConsole("treasury")}
+          <HudHeader />
+        </UnderConstructionOverlay>
+        <TelemetrySection>
+          <UnderConstructionOverlay>
+            <NodeTelemetryCard nodeId={company.startingNodeId} />
+            <TreasuryTelemetryCard
+              cashBalance={company.cashBalance}
+              companyName={company.name}
+              franchise={franchise}
+              reputation={company.reputation ?? 100}
+              consoleActive={Boolean(codeConsoleActive["treasury"])}
+              onToggleConsole={() => toggleConsole("treasury")}
+            />
+          </UnderConstructionOverlay>
+        </TelemetrySection>
+        <UnderConstructionOverlay>
+          <TerminalStreamSection
+            startingNodeId={company.startingNodeId}
+            licenseName={franchise}
           />
         </UnderConstructionOverlay>
-      </TelemetrySection>
-      <UnderConstructionOverlay>
-        <TerminalStreamSection
-          startingNodeId={company.startingNodeId}
-          licenseName={franchise}
-        />
-      </UnderConstructionOverlay>
-      <UnderConstructionOverlay>
-        <SubSchematicSection
-          selectedSec={selectedSec}
-          onSelectSec={setSelectedSec}
-          codeConsoleActive={codeConsoleActive}
-          onToggleConsole={toggleConsole}
-        />
-      </UnderConstructionOverlay>
-      <UnderConstructionOverlay>
-        <FooterTelemetryTable />
-      </UnderConstructionOverlay>
-      <FooterInfoBar currentDirectory={currentDirectory} />
+        <UnderConstructionOverlay>
+          <SubSchematicSection
+            selectedSec={selectedSec}
+            onSelectSec={setSelectedSec}
+            codeConsoleActive={codeConsoleActive}
+            onToggleConsole={toggleConsole}
+          />
+        </UnderConstructionOverlay>
+        <UnderConstructionOverlay>
+          <FooterTelemetryTable />
+        </UnderConstructionOverlay>
+        <FooterInfoBar currentDirectory={currentDirectory} />
+      </Flex>
     </PageTemplate>
   );
 };

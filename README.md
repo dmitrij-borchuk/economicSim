@@ -37,6 +37,7 @@ npm run start:dev
 By default, the API server starts on `http://localhost:3000` (or the port defined by the `PORT` environment variable).
 
 **Other Server Commands:**
+
 - `npm run build` — Compile TypeScript to `dist/`
 - `npm test` — Run unit tests with Vitest
 - `npm run test:e2e` — Run end-to-end tests
@@ -60,6 +61,7 @@ npm run dev
 The web client will be available at `http://localhost:5173`.
 
 **Other Web Commands:**
+
 - `npm run build` — Type-check and generate production build
 - `npm run preview` — Preview the production build locally
 - `npm run lint` — Lint source files with ESLint
@@ -69,6 +71,7 @@ The web client will be available at `http://localhost:5173`.
 ## 📖 Documentation
 
 Comprehensive system and game mechanics documentation is located in `docs/` :
+
 - [`docs/index.md`](./docs/index.md) — Master Map of Content (MOC)
 - **Core Engine**: Tick loops, atomic phases, pacing, and configuration
 - **Geography & Logistics**: Spatial node graph, distance-based freight, starter provinces
@@ -91,4 +94,9 @@ Comprehensive system and game mechanics documentation is located in `docs/` :
 - [ ] AI generated company ID from name (use openrouter)
 
 ## TODO:
+
 - [ ] Make a name for the application or terminal
+
+## Tasks
+
+[] - Sometimes onboarding is loaded insted of dashboard (mayby only when server starts)

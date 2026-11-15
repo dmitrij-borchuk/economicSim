@@ -1,4 +1,5 @@
 export * from './HudHeader';
+export * from './CompanyOverviewCard';
 export * from './NodeTelemetryCard';
 export * from './TreasuryTelemetryCard';
 export * from './TerminalStreamSection';

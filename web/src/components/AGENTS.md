@@ -1,7 +1,14 @@
-# File structure
-- when you make or update components write styled components in the end of the file
-- the main component properties type like `export type ComponentProps = {}` should be the first export of the file
-- the main component should be second export of the file
+- **Styling**
+  - when you make or update components write styled components using the `@/libs/styled`
 
-# Styling
-- when you make or update components write styled components using the `@/libs/styled`
+- **Components writing rules**:
+  - When more than 4 `sx` props are used, make separate styled component.
+  - Don't use default export for components.
+  - Try to decompose components to smaller
+  - Make smaller components as sharable if possible and put them in `molecules/` or `atoms/` folder.
+  - For every MUI component make wrapper in appropriate atoms or molecules folder.
+  - For the styling MUI components use themes.
+  - when you make or update components write styled components in the end of the file
+  - the main component properties type like `export type ComponentProps = {}` should be the first export of the file
+  - the main component should be second export of the file
+  - reuse existing components from `molecules` and `atoms` folders.

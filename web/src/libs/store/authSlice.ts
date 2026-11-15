@@ -17,6 +17,12 @@ export interface FacilitySummary {
   level: number;
 }
 
+export interface InventoryItemSummary {
+  itemType: string;
+  quantity: number;
+  quality: number;
+}
+
 export interface CompanyProfile {
   id: string;
   name: string;
@@ -27,6 +33,7 @@ export interface CompanyProfile {
   starterLicenseId?: string;
   startingNodeId: string;
   facilities?: FacilitySummary[];
+  inventory?: InventoryItemSummary[];
   createdAt: string;
 }
 
