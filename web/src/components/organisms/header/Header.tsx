@@ -1,8 +1,19 @@
 import React from 'react';
-import { styled } from '@mui/material/styles';
+import { useLocation, useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useSnackbar } from 'notistack';
-import { AppBar, Toolbar, Box, Typography, Button, Divider } from '@/atoms';
+import { alpha } from '@mui/material/styles';
+import { styled } from '@/libs/styled';
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Flex,
+  Typography,
+  Button,
+  Divider,
+  SectorPill,
+} from '@/atoms';
 import {
   OperatingCapitalBadge,
   CorporateEntityBadge,
@@ -11,35 +22,11 @@ import {
 import { useAuth } from '@/libs/auth/useAuth';
 import type { CompanyProfile, UserProfile } from '@/libs/store/authSlice';
 
-export interface HeaderProps {
+export type HeaderProps = {
   company?: CompanyProfile | null;
   user?: UserProfile | null;
   onDisconnect?: () => void | Promise<void>;
-}
-
-const StyledAppBar = styled(AppBar)(() => ({
-  backgroundColor: '#0c1220',
-  borderBottom: '1px solid #1e293b',
-  boxShadow: 'none',
-}));
-
-const BrandLogo = styled(Typography)(() => ({
-  fontWeight: 900,
-  letterSpacing: 2,
-  color: '#38bdf8',
-  display: 'flex',
-  alignItems: 'center',
-  gap: '8px',
-}));
-
-const DisconnectButton = styled(Button)(() => ({
-  borderColor: '#334155',
-  color: '#94a3b8',
-  '&:hover': {
-    borderColor: '#ef4444',
-    color: '#fca5a5',
-  },
-}));
+};
 
 export const Header: React.FC<HeaderProps> = ({
   company: propCompany,
@@ -48,9 +35,30 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const auth = useAuth();
   const { enqueueSnackbar } = useSnackbar();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const company = propCompany !== undefined ? propCompany : auth.company;
   const user = propUser !== undefined ? propUser : auth.user;
+
+  const isDashboardActive = location.pathname === '/';
+  const isFacilitiesActive =
+    location.pathname === '/facilities' ||
+    location.pathname.startsWith('/facilities/');
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+  };
+
+  const handleNavKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    path: string
+  ) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      navigate(path);
+    }
+  };
 
   const handleDisconnect = async () => {
     if (propOnDisconnect) {
@@ -58,30 +66,63 @@ export const Header: React.FC<HeaderProps> = ({
       return;
     }
     await auth.signOut();
-    enqueueSnackbar('Command session terminated. Operator logged out.', { variant: 'info' });
+    enqueueSnackbar('Command session terminated. Operator logged out.', {
+      variant: 'info',
+    });
   };
 
   const operatorIdentifier = user?.email || user?.uid || 'Unknown';
 
   return (
     <StyledAppBar position="static">
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <BrandLogo variant="subtitle1">
+      <StyledToolbar>
+        <Flex alignCenter gap={2.5}>
+          <BrandLogo
+            variant="subtitle1"
+            onClick={() => handleNavigate('/')}
+          >
             PES
           </BrandLogo>
-        </Box>
+
+          {company && (
+            <NavContainer component="nav" aria-label="Primary">
+              <NavPill
+                role="link"
+                tabIndex={0}
+                active={isDashboardActive}
+                aria-current={isDashboardActive ? 'page' : undefined}
+                onClick={() => handleNavigate('/')}
+                onKeyDown={(event) => handleNavKeyDown(event, '/')}
+              >
+                DASHBOARD
+              </NavPill>
+              <NavPill
+                role="link"
+                tabIndex={0}
+                active={isFacilitiesActive}
+                aria-current={isFacilitiesActive ? 'page' : undefined}
+                onClick={() => handleNavigate('/facilities')}
+                onKeyDown={(event) => handleNavKeyDown(event, '/facilities')}
+              >
+                FACILITIES
+              </NavPill>
+            </NavContainer>
+          )}
+        </Flex>
 
         {company && (
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+          <Flex alignCenter gap={3}>
             <OperatingCapitalBadge cashBalance={company.cashBalance} />
-            <Divider orientation="vertical" flexItem sx={{ borderColor: '#1e293b' }} />
-            <CorporateEntityBadge name={company.name} companyId={company.companyId} />
-            <Divider orientation="vertical" flexItem sx={{ borderColor: '#1e293b' }} />
-          </Box>
+            <VerticalDivider orientation="vertical" flexItem />
+            <CorporateEntityBadge
+              name={company.name}
+              companyId={company.companyId}
+            />
+            <VerticalDivider orientation="vertical" flexItem />
+          </Flex>
         )}
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+        <Flex alignCenter gap={1.5}>
           <OperatorBadge identifier={operatorIdentifier} />
 
           <DisconnectButton
@@ -92,10 +133,58 @@ export const Header: React.FC<HeaderProps> = ({
           >
             DISCONNECT
           </DisconnectButton>
-        </Box>
-      </Toolbar>
+        </Flex>
+      </StyledToolbar>
     </StyledAppBar>
   );
 };
 
 export { Header as AppHeader };
+
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
+  borderBottom: `1px solid ${theme.palette.divider}`,
+  boxShadow: 'none',
+}));
+
+const StyledToolbar = styled(Toolbar)(() => ({
+  justifyContent: 'space-between',
+}));
+
+const BrandLogo = styled(Typography)(({ theme }) => ({
+  fontWeight: 900,
+  letterSpacing: 2,
+  color: theme.palette.primary.light,
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(1),
+  cursor: 'pointer',
+  userSelect: 'none',
+}));
+
+const NavContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(1),
+}));
+
+const NavPill = styled(SectorPill)(({ theme }) => ({
+  '&[aria-current="page"]': {
+    color: theme.palette.secondary.light,
+    borderTop: `2px solid ${theme.palette.secondary.main}`,
+    backgroundColor: alpha(theme.palette.secondary.main, 0.08),
+  },
+}));
+
+const VerticalDivider = styled(Divider)(({ theme }) => ({
+  borderColor: theme.palette.divider,
+}));
+
+const DisconnectButton = styled(Button)(({ theme }) => ({
+  borderColor: theme.palette.divider,
+  color: theme.palette.text.secondary,
+  '&:hover': {
+    borderColor: theme.palette.error.main,
+    color: theme.palette.error.light,
+  },
+}));

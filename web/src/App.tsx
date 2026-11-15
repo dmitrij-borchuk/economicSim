@@ -4,7 +4,13 @@ import { PublicRoute } from './components/auth/PublicRoute';
 import { OnboardingRoute } from './components/auth/OnboardingRoute';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { AppLayout } from './components/layout/AppLayout';
-import { LoginPage, OnboardingPage, DashboardPage } from '@/pages';
+import {
+  LoginPage,
+  OnboardingPage,
+  DashboardPage,
+  FacilitiesPage,
+  FacilityDetailPage,
+} from '@/pages';
 
 export const App: React.FC = () => {
   return (
@@ -23,6 +29,11 @@ export const App: React.FC = () => {
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
           <Route path="/" element={<DashboardPage />} />
+          <Route path="/facilities" element={<FacilitiesPage />} />
+          <Route
+            path="/facilities/:facilityId"
+            element={<FacilityDetailPage />}
+          />
         </Route>
       </Route>
 

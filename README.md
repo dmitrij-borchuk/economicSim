@@ -101,3 +101,7 @@ Comprehensive system and game mechanics documentation is located in `docs/` :
 
 [] - Sometimes onboarding is loaded insted of dashboard (mayby only when server starts)
 [] - When the user swith from login to register the dialog should not show previus error from login
+[] - Update header, make nabigation panel somewhere
+[] - Add reset password
+[] - Make user icon with menu
+[] - Replace "Apex" string with some other system name

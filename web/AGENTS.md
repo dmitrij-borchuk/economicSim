@@ -93,6 +93,11 @@ All application logic, data transformations, and state abstractions **must resid
 - Ensure all interactive elements have accessible labels (`aria-label`, visible titles).
 - Maintain responsive layouts supporting standard desktop screen sizes (1280px+) and responsive scaling for smaller viewports.
 
+### 7. Rules
+
+- Try to reuse existing components.
+- If some component repeated 3+ times, separate in in arrropriate filder amd make reusable.
+
 ---
 
 ## 🧪 Verification Checklist

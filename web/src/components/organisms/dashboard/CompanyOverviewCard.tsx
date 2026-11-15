@@ -1,13 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { formatCurrency } from '@/libs/math';
 import { formatDate } from '@/libs/date';
 import type { CompanyProfile } from '@/libs/store/authSlice';
 import { styled } from '@/libs/styled';
 import { TelemetryFieldBlock, TelemetryAssetCard } from '@/molecules/telemetry';
 import { Card, CardHeader, CardContent, Paper } from '@/atoms/surfaces';
-import { HudTag, MetaChip, StatusPip } from '@/atoms/hud';
+import { HudConsoleButton, HudTag, MetaChip, StatusPip } from '@/atoms/hud';
 import { Typography } from '@/atoms/dataDisplay';
-import { Flex } from '@/atoms/layout';
+import { Flex, HeaderRow } from '@/atoms/layout';
 
 export type CompanyOverviewCardProps = {
   company: CompanyProfile;
@@ -18,17 +19,31 @@ export const CompanyOverviewCard: React.FC<CompanyOverviewCardProps> = ({
   company,
   franchise,
 }) => {
+  const navigate = useNavigate();
   const formattedBalance = formatCurrency(company.cashBalance);
   const formattedDate = formatDate(company.createdAt);
 
   const facilities = company.facilities ?? [];
   const inventory = company.inventory ?? [];
 
+  const handleNavigateToFacilities = () => {
+    navigate('/facilities');
+  };
+
+  const handleFacilitiesKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>
+  ) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      navigate('/facilities');
+    }
+  };
+
   return (
     <Card component="section" aria-label="Company Overview">
       <CardHeader
         title={
-          <Flex sx={{ justifyContent: 'space-between' }}>
+          <HeaderRow>
             <Flex alignCenter gap={1.5}>
               <HudTag variant="header">[ CHARTER ]</HudTag>
               <Typography variant="caption" color="textPrimary">
@@ -45,7 +60,7 @@ export const CompanyOverviewCard: React.FC<CompanyOverviewCardProps> = ({
                 </Typography>
               </Flex>
             </Flex>
-          </Flex>
+          </HeaderRow>
         }
       />
 
@@ -95,9 +110,24 @@ export const CompanyOverviewCard: React.FC<CompanyOverviewCardProps> = ({
 
         {/* 3. Starting Node & Facilities */}
         <SectionColumn column gap={1.25}>
-          <SectionHeader variant="overline" color="textSecondary">
-            | 03. SECTOR &amp; FACILITIES ({facilities.length})
-          </SectionHeader>
+          <SectionHeaderRow alignCenter>
+            <InteractiveSectionHeader
+              variant="overline"
+              color="textSecondary"
+              onClick={handleNavigateToFacilities}
+            >
+              | 03. SECTOR &amp; FACILITIES ({facilities.length})
+            </InteractiveSectionHeader>
+            <HudConsoleButton
+              role="button"
+              tabIndex={0}
+              aria-label="Open Facilities Directory"
+              onClick={handleNavigateToFacilities}
+              onKeyDown={handleFacilitiesKeyDown}
+            >
+              [ DIRECTORY → ]
+            </HudConsoleButton>
+          </SectionHeaderRow>
 
           <TelemetryFieldBlock
             label="HEADQUARTERS NODE"
@@ -114,6 +144,8 @@ export const CompanyOverviewCard: React.FC<CompanyOverviewCardProps> = ({
                 tagVariant="darkGreen"
                 leftMeta={`TYPE: ${fac.facilityType}`}
                 rightMeta={`NODE: ${fac.nodeId}`}
+                ariaLabel={`Inspect facility ${fac.name}`}
+                onClick={() => navigate(`/facilities/${fac.id}`)}
               />
             ))
           ) : (
@@ -181,8 +213,23 @@ const SectionHeader = styled(Typography)(({ theme }) => ({
   paddingBottom: theme.spacing(0.5),
 }));
 
+const SectionHeaderRow = styled(Flex)(({ theme }) => ({
+  justifyContent: 'space-between',
+  borderBottom: `1px solid ${theme.palette.divider}`,
+  paddingBottom: theme.spacing(0.5),
+  gap: theme.spacing(1),
+}));
+
+const InteractiveSectionHeader = styled(Typography)(({ theme }) => ({
+  cursor: 'pointer',
+  transition: 'color 0.15s ease',
+  '&:hover': {
+    color: theme.palette.primary.light,
+  },
+}));
+
 const EmptyStateBox = styled(Paper)(({ theme }) => ({
-  border: '1px dashed #1f2533',
+  border: `1px dashed ${theme.palette.divider}`,
   padding: theme.spacing(1.5),
   textAlign: 'center',
 }));
