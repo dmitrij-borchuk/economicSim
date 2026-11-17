@@ -1,5 +1,4 @@
 import React from 'react';
-import { formatCurrency } from '@/libs/math';
 import {
   formatRecipeSummary,
   getFacilitySpec,
@@ -30,7 +29,6 @@ export const FacilityRosterCard: React.FC<FacilityRosterCardProps> = ({
 }) => {
   const spec = getFacilitySpec(facility.facilityType);
   const recipeSummary = formatRecipeSummary(spec);
-  const formattedUpkeep = formatCurrency(spec.baseMaintenance);
 
   const handleInspectClick = () => {
     onInspect(facility.id);
@@ -112,14 +110,6 @@ export const FacilityRosterCard: React.FC<FacilityRosterCardProps> = ({
             value={recipeSummary}
           />
         </RosterColumn>
-
-        <RosterColumn column gap={1}>
-          <TelemetryFieldBlock
-            label="BASE MAINTENANCE / TICK"
-            value={`$${formattedUpkeep} CR`}
-            tone="balance"
-          />
-        </RosterColumn>
       </RosterBodyGrid>
     </InteractiveRosterCard>
   );
@@ -142,7 +132,7 @@ const InteractiveRosterCard = styled(Card)(({ theme }) => ({
 
 const RosterBodyGrid = styled(CardContent)(({ theme }) => ({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
+  gridTemplateColumns: 'repeat(3, 1fr)',
   gap: theme.spacing(2.5),
   [theme.breakpoints.down('lg')]: {
     gridTemplateColumns: 'repeat(2, 1fr)',

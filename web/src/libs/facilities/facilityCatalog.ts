@@ -34,7 +34,6 @@ export interface FacilitySpec {
   category: FacilityCategory;
   sector: string;
   description: string;
-  baseMaintenance: number;
   inputs: FacilityRecipeIO[];
   outputs: FacilityRecipeIO[];
 }
@@ -42,7 +41,6 @@ export interface FacilitySpec {
 export interface FacilityPortfolioSummary {
   totalFacilities: number;
   activeFacilities: number;
-  totalBaseMaintenance: number;
   byCategory: Record<FacilityCategory, number>;
 }
 
@@ -53,7 +51,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     category: 'EXTRACTOR',
     sector: 'AGRICULTURE',
     description: 'Harvests raw grain directly from arable deposit nodes.',
-    baseMaintenance: 20,
     inputs: [],
     outputs: [{ itemType: 'GRAIN', quantity: 20 }],
   },
@@ -63,7 +60,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     category: 'EXTRACTOR',
     sector: 'FORESTRY',
     description: 'Harvests raw timber logs from forest deposit nodes.',
-    baseMaintenance: 20,
     inputs: [],
     outputs: [{ itemType: 'TIMBER', quantity: 15 }],
   },
@@ -73,7 +69,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     category: 'EXTRACTOR',
     sector: 'METALLURGY',
     description: 'Extracts raw iron ore from mineral vein deposit nodes.',
-    baseMaintenance: 30,
     inputs: [],
     outputs: [{ itemType: 'IRON_ORE', quantity: 10 }],
   },
@@ -83,7 +78,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     category: 'EXTRACTOR',
     sector: 'CONSTRUCTION',
     description: 'Quarries raw structural stone from rock deposit nodes.',
-    baseMaintenance: 25,
     inputs: [],
     outputs: [{ itemType: 'STONE', quantity: 15 }],
   },
@@ -94,7 +88,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     sector: 'AGRICULTURE',
     description:
       'Milling installation that grinds raw grain into refined flour.',
-    baseMaintenance: 20,
     inputs: [{ itemType: 'GRAIN', quantity: 2 }],
     outputs: [{ itemType: 'FLOUR', quantity: 1 }],
   },
@@ -105,7 +98,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     sector: 'AGRICULTURE',
     description:
       'Bakes refined flour into consumer bread loaves for settlement retail markets.',
-    baseMaintenance: 30,
     inputs: [{ itemType: 'FLOUR', quantity: 1 }],
     outputs: [{ itemType: 'BREAD', quantity: 2 }],
   },
@@ -115,7 +107,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     category: 'PROCESSOR',
     sector: 'FORESTRY',
     description: 'Cuts raw timber logs into structural wooden planks.',
-    baseMaintenance: 25,
     inputs: [{ itemType: 'TIMBER', quantity: 2 }],
     outputs: [{ itemType: 'PLANKS', quantity: 2 }],
   },
@@ -126,7 +117,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     sector: 'FORESTRY',
     description:
       'Crafts finished household furniture from structural wooden planks.',
-    baseMaintenance: 35,
     inputs: [{ itemType: 'PLANKS', quantity: 2 }],
     outputs: [{ itemType: 'FURNITURE', quantity: 1 }],
   },
@@ -137,7 +127,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     sector: 'METALLURGY',
     description:
       'Refines raw iron ore in high-temperature furnaces into iron ingots.',
-    baseMaintenance: 50,
     inputs: [{ itemType: 'IRON_ORE', quantity: 2 }],
     outputs: [{ itemType: 'IRON_INGOT', quantity: 1 }],
   },
@@ -148,7 +137,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     sector: 'CONSTRUCTION',
     description:
       'Fires quarried stone into standardized structural masonry bricks.',
-    baseMaintenance: 30,
     inputs: [{ itemType: 'STONE', quantity: 2 }],
     outputs: [{ itemType: 'BRICKS', quantity: 2 }],
   },
@@ -159,7 +147,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     sector: 'METALLURGY',
     description:
       'Forges industrial tools and harvesting equipment from iron ingots and planks.',
-    baseMaintenance: 45,
     inputs: [
       { itemType: 'IRON_INGOT', quantity: 1 },
       { itemType: 'PLANKS', quantity: 1 },
@@ -173,7 +160,6 @@ export const FACILITY_CATALOG: Record<KnownFacilityType, FacilitySpec> = {
     sector: 'CONSTRUCTION',
     description:
       'Assembles modular building kits from iron ingots, masonry bricks, and wooden planks.',
-    baseMaintenance: 60,
     inputs: [
       { itemType: 'IRON_INGOT', quantity: 2 },
       { itemType: 'BRICKS', quantity: 4 },
@@ -190,7 +176,6 @@ export const DEFAULT_FACILITY_SPEC: FacilitySpec = {
   sector: 'GENERAL',
   description:
     'Standard industrial installation registered on the corporate charter.',
-  baseMaintenance: 20,
   inputs: [],
   outputs: [],
 };
@@ -256,18 +241,14 @@ export function calculatePortfolioSummary(
     GENERAL: 0,
   };
 
-  let totalBaseMaintenance = 0;
-
   for (const facility of facilities) {
     const spec = getFacilitySpec(facility.facilityType);
     byCategory[spec.category] += 1;
-    totalBaseMaintenance += spec.baseMaintenance;
   }
 
   return {
     totalFacilities: facilities.length,
     activeFacilities: facilities.length,
-    totalBaseMaintenance,
     byCategory,
   };
 }

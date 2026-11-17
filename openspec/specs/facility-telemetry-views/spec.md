@@ -22,11 +22,11 @@ The web client SHALL provide navigation controls in the application header and o
 - **THEN** the client navigates to `/facilities/:facilityId` for that facility's `id`
 
 ### Requirement: Facilities directory page (`/facilities`)
-The system SHALL render a protected facilities directory page at `/facilities` displaying portfolio-wide summary metrics (total installations and estimated base maintenance per tick) and a roster of all facilities owned by the player's company.
+The system SHALL render a protected facilities directory page at `/facilities` displaying portfolio-wide summary metrics (total installations, operational status count, and category distribution) and a roster of all facilities owned by the player's company.
 
 #### Scenario: View owned facilities on directory page
 - **WHEN** an authenticated player with one or more facilities visits `/facilities`
-- **THEN** the page displays the portfolio summary metrics and renders a telemetry card for each owned facility showing its name, ID, category, facility type, sector node, production output summary, and base maintenance cost
+- **THEN** the page displays the portfolio summary metrics and renders a telemetry card for each owned facility showing its name, ID, category, facility type, sector node, and production output summary
 
 #### Scenario: Select a facility from the directory roster
 - **WHEN** an authenticated player clicks a facility entry or its inspect action on `/facilities`
@@ -41,7 +41,7 @@ The system SHALL render a protected single-facility inspector page at `/faciliti
 
 #### Scenario: Inspect a valid owned facility
 - **WHEN** an authenticated player visits `/facilities/:facilityId` with an ID matching one of their company's facilities
-- **THEN** the page displays the facility's identity and sector node, its category and input/output batch recipe, its base maintenance cost per tick, and matching commodity lots from the company warehouse inventory
+- **THEN** the page displays the facility's identity and sector node, its category and input/output batch recipe, and matching commodity lots from the company warehouse inventory
 
 #### Scenario: Visit an unknown or unowned facility ID
 - **WHEN** an authenticated player visits `/facilities/:facilityId` with an ID that does not exist in their company's facilities list

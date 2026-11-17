@@ -1,5 +1,4 @@
 import React from 'react';
-import { formatCurrency } from '@/libs/math';
 import {
   formatRecipeIOList,
   formatRecipeSummary,
@@ -40,7 +39,6 @@ export const FacilityInspectorCard: React.FC<FacilityInspectorCardProps> = ({
   onBackToDirectory,
 }) => {
   const spec = getFacilitySpec(facility.facilityType);
-  const formattedUpkeep = formatCurrency(spec.baseMaintenance);
   const recipeSummary = formatRecipeSummary(spec);
   const inputSummary = formatRecipeIOList(spec.inputs);
   const outputSummary = formatRecipeIOList(spec.outputs);
@@ -153,12 +151,6 @@ export const FacilityInspectorCard: React.FC<FacilityInspectorCardProps> = ({
             label="OUTPUT YIELD PER BATCH"
             value={outputSummary}
             tone="primary"
-          />
-
-          <TelemetryFieldBlock
-            label="BASE MAINTENANCE UPKEEP"
-            value={`$${formattedUpkeep} CR / TICK`}
-            tone="balance"
           />
         </InspectorColumn>
 

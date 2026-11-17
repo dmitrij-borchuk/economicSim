@@ -16,7 +16,6 @@ created: 2026-09-12
 In the economic simulator, players act as Chief Executive Officers of an incorporated enterprise (`Company`). Every facility, warehouse, market order, and contract is owned and financed by the corporate balance sheet.
 
 For founding details, see [[onboarding-and-licenses]].
-For operational maintenance fees, see [[transformation-chains]].
 For extraction plot capacity limits, see [[resource-extraction]].
 For execution of accounting in the tick lifecycle, see [[simulation-tick-loop|Tick Phase 7]].
 
@@ -54,7 +53,6 @@ $$\text{NetProfit} = \text{TotalRevenue} - \text{TotalOperatingExpenses}$$
 - **Expenses**:
   - `InputMaterialPurchases`: Sourced commodities.
   - `LogisticsFreightFees`: Distance shipping fees from [[delivery-and-freight]].
-  - `FacilityMaintenance`: Base upkeep fees per processing facility level.
   - `MarketExchangeFees`: $2.0\%$ exchange levy on spot market sales.
 
 ---
@@ -75,10 +73,9 @@ Where:
 ## 4. Insolvency, Overdraft & Restructuring
 
 If a company's cash reserves drop into negative numbers ($\text{CashBalance} < 0$):
-1. **Operating Freeze**: In Phase 7, if a facility cannot cover its per-tick maintenance fee, its status shifts from `OPERATING` to `IDLE`. The facility produces no output and consumes no materials until funds are restored.
-2. **Contract Default**: The company fails to fulfill its active [[b2b-contracts]], triggering contract breaches and liquidated damage penalties.
-3. **Credit Downgrade**: The company's credit rating drops, restricting its ability to participate in high-value trade hub bids.
-4. **Liquidation Mode**: The player can liquidate resting inventory at fire-sale discounts or auction off facility plots to raise emergency liquidity.
+1. **Contract Default**: The company fails to fulfill its active [[b2b-contracts]], triggering contract breaches and liquidated damage penalties.
+2. **Credit Downgrade**: The company's credit rating drops, restricting its ability to participate in high-value trade hub bids.
+3. **Liquidation Mode**: The player can liquidate resting inventory at fire-sale discounts or auction off facility plots to raise emergency liquidity.
 
 ---
 

@@ -45,7 +45,7 @@ graph TD
     P3 --> P4[Phase 4: Hub Spot Market Matching]
     P4 --> P5[Phase 5: Settlement Retail Consumption Sink]
     P5 --> P6[Phase 6: Capital Construction & Upgrades Sink]
-    P6 --> P7[Phase 7: Maintenance, Accounting & State Snapshot]
+    P6 --> P7[Phase 7: Accounting & State Snapshot]
     P7 --> Broadcast([Tick T Complete & Broadcast Diff])
 ```
 
@@ -101,13 +101,12 @@ graph TD
   1. Active construction projects and facility level upgrades pull required building materials (Tools, Bricks, Planks, Building Kits) from staging storage as defined in [[capital-construction-sink]].
   2. Once all required materials and construction ticks are fulfilled, the new facility or level status activates for the upcoming tick.
 
-### Phase 7: Maintenance, Accounting & State Snapshot
-- **Objective**: Settle operating costs, update financial records, persist world state, and notify connected players.
+### Phase 7: Accounting & State Snapshot
+- **Objective**: Update financial records, persist world state, and notify connected players.
 - **Mechanism**:
-  1. Deduct facility base operating maintenance costs from company cash reserves.
-  2. Calculate company net worth, revenue, and profit/loss statements as detailed in [[company-management]].
-  3. Persist the updated state to the persistence layer (see [[system-design-overview]]).
-  4. Package tick deltas (executed trades, production results, cash changes) and broadcast via WebSocket to connected web clients (see [[api-and-websocket-protocol]]).
+  1. Calculate company net worth, revenue, and profit/loss statements as detailed in [[company-management]].
+  2. Persist the updated state to the persistence layer (see [[system-design-overview]]).
+  3. Package tick deltas (executed trades, production results, cash changes) and broadcast via WebSocket to connected web clients (see [[api-and-websocket-protocol]]).
 
 ---
 

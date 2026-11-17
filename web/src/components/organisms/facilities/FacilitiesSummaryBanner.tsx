@@ -1,5 +1,4 @@
 import React from 'react';
-import { formatCurrency } from '@/libs/math';
 import type { FacilityPortfolioSummary } from '@/libs/facilities';
 import { styled } from '@/libs/styled';
 import { TelemetryFieldBlock } from '@/molecules/telemetry';
@@ -18,7 +17,6 @@ export type FacilitiesSummaryBannerProps = {
 export const FacilitiesSummaryBanner: React.FC<
   FacilitiesSummaryBannerProps
 > = ({ companyName, companyId, startingNodeId, summary }) => {
-  const formattedUpkeep = formatCurrency(summary.totalBaseMaintenance);
   const categoryBreakdown = `EXT: ${summary.byCategory.EXTRACTOR} | PROC: ${summary.byCategory.PROCESSOR} | MFG: ${summary.byCategory.MANUFACTURER}`;
 
   return (
@@ -66,14 +64,6 @@ export const FacilitiesSummaryBanner: React.FC<
 
         <SummaryColumn column gap={1}>
           <TelemetryFieldBlock
-            label="EST. BASE UPKEEP / TICK"
-            value={`$${formattedUpkeep} CR`}
-            tone="balance"
-          />
-        </SummaryColumn>
-
-        <SummaryColumn column gap={1}>
-          <TelemetryFieldBlock
             label="CATEGORY DISTRIBUTION"
             value={categoryBreakdown}
           />
@@ -85,7 +75,7 @@ export const FacilitiesSummaryBanner: React.FC<
 
 const SummaryGrid = styled(CardContent)(({ theme }) => ({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
+  gridTemplateColumns: 'repeat(3, 1fr)',
   gap: theme.spacing(2.5),
   [theme.breakpoints.down('lg')]: {
     gridTemplateColumns: 'repeat(2, 1fr)',

@@ -40,7 +40,6 @@ export interface Recipe {
     itemType: string;
     quantity: number;
   }>;
-  baseProcessingCost: number; // In Credits per batch
 }
 ```
 
@@ -50,22 +49,22 @@ export interface Recipe {
 2. **Material Consumption**: If $B \ge 1$, the facility consumes $B \times \text{RequiredQty}(i)$ units of each input item.
 3. **Quality Evaluation**: Output quality is calculated from the consumed input batches using the weighted blending algorithm defined in [[quality-system]].
 4. **Production Output**: The facility generates $B \times \text{OutputQty}$ units of the finished item and adds them to its output warehouse.
-5. **Partial Batching**: If inputs are insufficient for even 1 batch ($B = 0$), the facility idles for that tick, incurring only the idle maintenance cost.
+5. **Partial Batching**: If inputs are insufficient for even 1 batch ($B = 0$), the facility idles for that tick.
 
 ---
 
 ## 2. Transformation Facilities Summary Table
 
-| Facility               | Inputs Required per Batch                                                   | Outputs per Batch             | Base Maintenance    | Sector                            |
-| ---------------------- | --------------------------------------------------------------------------- | ----------------------------- | ------------------- | --------------------------------- |
-| **Flour Mill**         | $2\times \text{Grain}$                                                      | $1\times \text{Flour}$        | $20\text{ Cr/tick}$ | [[agriculture-chain]]             |
-| **Bakery**             | $1\times \text{Flour}$                                                      | $2\times \text{Bread}$        | $30\text{ Cr/tick}$ | [[agriculture-chain]]             |
-| **Sawmill**            | $2\times \text{Timber}$                                                     | $2\times \text{Planks}$       | $25\text{ Cr/tick}$ | [[forestry-chain]]                |
-| **Carpentry Workshop** | $2\times \text{Planks}$                                                     | $1\times \text{Furniture}$    | $35\text{ Cr/tick}$ | [[forestry-chain]]                |
-| **Smelter**            | $2\times \text{Iron Ore}$                                                   | $1\times \text{Iron Ingot}$   | $50\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
-| **Brick Kiln**         | $2\times \text{Stone}$                                                      | $2\times \text{Bricks}$       | $30\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
-| **Toolsmith**          | $1\times \text{Iron Ingot} + 1\times \text{Plank}$                          | $2\times \text{Tools}$        | $45\text{ Cr/tick}$ | [[metallurgy-construction-chain]] |
-| **Construction Yard**  | $2\times \text{Iron Ingot} + 4\times \text{Bricks} + 4\times \text{Planks}$ | $1\times \text{Building Kit}$ | $60\text{ Cr/tick}$ | [[capital-construction-sink]]     |
+| Facility               | Inputs Required per Batch                                                   | Outputs per Batch             | Sector                            |
+| ---------------------- | --------------------------------------------------------------------------- | ----------------------------- | --------------------------------- |
+| **Flour Mill**         | $2\times \text{Grain}$                                                      | $1\times \text{Flour}$        | [[agriculture-chain]]             |
+| **Bakery**             | $1\times \text{Flour}$                                                      | $2\times \text{Bread}$        | [[agriculture-chain]]             |
+| **Sawmill**            | $2\times \text{Timber}$                                                     | $2\times \text{Planks}$       | [[forestry-chain]]                |
+| **Carpentry Workshop** | $2\times \text{Planks}$                                                     | $1\times \text{Furniture}$    | [[forestry-chain]]                |
+| **Smelter**            | $2\times \text{Iron Ore}$                                                   | $1\times \text{Iron Ingot}$   | [[metallurgy-construction-chain]] |
+| **Brick Kiln**         | $2\times \text{Stone}$                                                      | $2\times \text{Bricks}$       | [[metallurgy-construction-chain]] |
+| **Toolsmith**          | $1\times \text{Iron Ingot} + 1\times \text{Plank}$                          | $2\times \text{Tools}$        | [[metallurgy-construction-chain]] |
+| **Construction Yard**  | $2\times \text{Iron Ingot} + 4\times \text{Bricks} + 4\times \text{Planks}$ | $1\times \text{Building Kit}$ | [[capital-construction-sink]]     |
 
 ---
 
@@ -74,8 +73,6 @@ export interface Recipe {
 Facilities can be upgraded from Level 1 up to Level 10:
 - **Throughput Capacity**: Directly proportional to facility level ($\text{Capacity} = \text{BaseBatch} \times \text{Level}$). A Level 3 Bakery processes up to 3 batches per tick ($3\text{ Flour} \to 6\text{ Bread}$).
 - **Upgrade Costs**: Upgrades require capital goods (Tools, Bricks, Building Kits) as detailed in [[capital-construction-sink]].
-- **Maintenance Scaling**: Maintenance cost scales sub-linearly to reward industrial scale:
-  $$\text{Maintenance}(L) = \text{BaseMaintenance} \times L^{0.85}$$
 
 ---
 

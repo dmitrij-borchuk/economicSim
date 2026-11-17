@@ -105,3 +105,5 @@ Comprehensive system and game mechanics documentation is located in `docs/` :
 [] - Add reset password
 [] - Make user icon with menu
 [] - Replace "Apex" string with some other system name
+[] - review footer. should it have usefull info
+[] - Method to set password after created account with social login
